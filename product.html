@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Core Spec Viewer | FLY FASHION</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 antialiased">
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 max-w-sm w-full"></div>
 
+    <nav class="sticky top-0 z-40 w-full border-b border-slate-100 dark:border-slate-900 glass-nav transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-8"><a href="index.html" class="text-2xl font-black tracking-tighter">FLY<span class="text-slate-400 font-light">FASHION</span></a></div>
+            <a href="cart.html" class="p-2 relative"><i data-lucide="shopping-bag"></i><span class="cart-count absolute -top-1 -right-1 bg-black text-white dark:bg-white dark:text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span></a>
+        </div>
+    </nav>
+
+    <main id="detail-host" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"></main>
+
+    <footer class="w-full border-t border-slate-100 dark:border-slate-900 py-12 bg-white dark:bg-slate-950 text-slate-500 text-xs text-center">
+        Designed with ❤️ by <a href="https://visioreach.co" target="_blank" rel="noopener noreferrer" class="underline font-bold text-slate-700 dark:text-slate-300">VisioReach Concepts</a>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/product-detail.js"></script>
+</body>
+</html>
