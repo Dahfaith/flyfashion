@@ -1,1 +1,76 @@
-
+[
+  {
+    "id": 1,
+    "name": "Premium Agbada Nomad Set",
+    "category": "native-wears",
+    "description": "A modern, minimalist interpretation of classic Yoruba attire. Tailored with structured, breathable cotton blend designed for contemporary high-fashion environments.",
+    "price": 85000,
+    "oldPrice": 120000,
+    "sizes": ["M", "L", "XL"],
+    "colors": ["#0F172A", "#1E293B", "#FFFFFF"],
+    "stock": 5,
+    "images": [
+      "https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=600&q=80"
+    ],
+    "rating": 4.9,
+    "featured": true,
+    "newArrival": true,
+    "trending": true
+  },
+  {
+    "id": 2,
+    "name": "Oversized Cyber-Punk Hoodie",
+    "category": "hoodies",
+    "description": "Engineered with 450GSM ultra-heavyweight loopback cotton. Features dropped shoulders, a double-lined structured hood, and subtle tonal branding.",
+    "price": 45000,
+    "oldPrice": 55000,
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["#000000", "#4B5563", "#7C3AED"],
+    "stock": 12,
+    "images": [
+      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80"
+    ],
+    "rating": 4.7,
+    "featured": true,
+    "newArrival": true,
+    "trending": false
+  },
+  {
+    "id": 3,
+    "name": "Retro Club Jersey 01",
+    "category": "jerseys",
+    "description": "Vibrant custom pitch-to-street jersey with sub-surface patterns inspired by Nigerian modern art movements. Premium embroidered crest detailing.",
+    "price": 32000,
+    "oldPrice": 32000,
+    "sizes": ["S", "M", "L"],
+    "colors": ["#10B981", "#FFFFFF"],
+    "stock": 8,
+    "images": [
+      "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80"
+    ],
+    "rating": 4.8,
+    "featured": false,
+    "newArrival": false,
+    "trending": true
+  },
+  {
+    "id": 4,
+    "name": "Air Craft Street Sneakers",
+    "category": "sneakers",
+    "description": "Ergonomically designed high-top leather sneakers with layered architectural outsoles and responsive cushioning technology.",
+    "price": 95000,
+    "oldPrice": 140000,
+    "sizes": ["41", "42", "43", "44"],
+    "colors": ["#FFFFFF", "#000000"],
+    "stock": 3,
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+    ],
+    "rating": 5.0,
+    "featured": true,
+    "newArrival": false,
+    "trending": true
+  }
+]
