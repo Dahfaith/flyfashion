@@ -1,49 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selected Infrastructure Holding | FLY FASHION Cart</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart — FLY FASHION</title>
+  <meta name="description" content="Your shopping cart at FLY FASHION. Review your items and checkout via WhatsApp." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 antialiased">
-    <div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 max-w-sm w-full"></div>
+<body class="bg-primary text-primary">
 
-    <nav class="sticky top-0 z-40 w-full border-b border-slate-100 dark:border-slate-900 glass-nav flex items-center h-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between">
-            <a href="index.html" class="text-2xl font-black tracking-tighter">FLY<span class="text-slate-400 font-light">FASHION</span></a>
-            <a href="shop.html" class="text-xs uppercase font-bold tracking-widest flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Continue Selection</a>
+<div id="page-loader">
+  <div class="text-3xl font-display font-bold text-accent tracking-widest">FLY FASHION</div>
+  <div class="loader-ring"></div>
+</div>
+
+<div id="menu-overlay"></div>
+<nav id="mobile-menu">
+  <div class="flex items-center justify-between mb-8">
+    <span class="font-display font-bold text-2xl text-accent">FLY</span>
+    <button onclick="document.getElementById('menu-toggle').click()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800"><i class="fas fa-times text-sm"></i></button>
+  </div>
+  <div class="flex flex-col gap-1 mb-8">
+    <a href="index.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+    <a href="shop.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Shop</a>
+    <a href="categories.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Categories</a>
+    <a href="shop.html?filter=newArrival" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">New Arrivals</a>
+    <a href="contact.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+  </div>
+  <div class="border-t border-custom pt-6 mb-6">
+    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Currency</p>
+    <div class="flex gap-2">
+      <button data-currency="NGN" class="currency-btn">₦ NGN</button>
+      <button data-currency="USD" class="currency-btn">$ USD</button>
+      <button data-currency="GBP" class="currency-btn">£ GBP</button>
+    </div>
+  </div>
+  <div class="border-t border-custom pt-6">
+    <button class="dark-mode-toggle flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 w-full font-medium text-sm"><i class="fas fa-moon"></i> Dark / Light</button>
+  </div>
+</nav>
+
+<header class="navbar" id="main-navbar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-2xl sm:text-3xl font-display font-bold text-accent">FLY</span>
+        <div class="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
+        <span class="hidden sm:block text-xs font-medium tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">Fashion</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="categories.html" class="nav-link">Categories</a>
+        <a href="shop.html?filter=newArrival" class="nav-link">New Arrivals</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden md:flex gap-1">
+          <button data-currency="NGN" class="currency-btn text-xs px-2 py-1">₦</button>
+          <button data-currency="USD" class="currency-btn text-xs px-2 py-1">$</button>
+          <button data-currency="GBP" class="currency-btn text-xs px-2 py-1">£</button>
         </div>
-    </nav>
+        <button class="dark-mode-toggle w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"><i class="fas fa-moon text-sm"></i></button>
+        <a href="cart.html" class="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+          <i class="fas fa-bag-shopping text-sm"></i>
+          <span class="cart-count" style="display:none">0</span>
+        </a>
+        <button id="menu-toggle" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
 
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-2xl font-black tracking-tight mb-8 uppercase">Your Selected Manifest</h1>
-        <div class="flex flex-col gap-6">
-            <div id="cart-items-container" class="flex flex-col gap-4"></div>
-            
-            <div id="cart-summary-card" class="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hidden flex-col gap-4">
-                <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <span class="text-sm font-medium text-slate-500">Subtotal Asset Calculation</span>
-                    <span id="cart-total-val" class="text-xl font-bold">₦0</span>
-                </div>
-                <button onclick="dispatchWhatsAppCheckout()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold tracking-wide rounded-xl shadow-md transition text-center text-sm">Compile & Checkout via WhatsApp Protocol</button>
-            </div>
+<!-- Page Header -->
+<div class="bg-secondary-custom py-10 sm:py-14 border-b border-custom">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <p class="text-xs text-gray-400 mb-2"><a href="index.html" class="hover:text-accent">Home</a> / Cart</p>
+    <h1 class="font-display text-4xl sm:text-5xl font-bold dark:text-white">Your Cart</h1>
+    <p class="text-gray-500 mt-1 text-sm" id="cart-item-count">Loading…</p>
+  </div>
+</div>
 
-            <div id="cart-empty-state" class="hidden flex-col items-center justify-center py-20 text-center">
-                <i data-lucide="shopping-cart" class="w-12 h-12 text-slate-300 mb-4"></i>
-                <p class="text-sm font-medium text-slate-400">Bag framework is currently void of items.</p>
-                <a href="shop.html" class="mt-4 px-6 py-2.5 bg-black text-white dark:bg-white dark:text-black rounded-xl text-xs font-bold tracking-wider uppercase">Initialize Shop Route</a>
-            </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+
+  <!-- Empty State -->
+  <div id="empty-cart" class="hidden empty-state py-24">
+    <div class="w-24 h-24 rounded-full bg-secondary-custom flex items-center justify-center mb-4">
+      <i class="fas fa-bag-shopping text-4xl text-gray-300"></i>
+    </div>
+    <h2 class="font-display text-3xl font-bold dark:text-white">Your cart is empty</h2>
+    <p class="text-gray-500 text-sm max-w-xs">Looks like you haven't added anything yet. Start shopping and fill it up!</p>
+    <a href="shop.html" class="btn-primary mt-4">
+      <i class="fas fa-bag-shopping"></i> Start Shopping
+    </a>
+  </div>
+
+  <!-- Cart Layout -->
+  <div id="cart-layout" class="hidden flex-col lg:flex-row gap-10">
+
+    <!-- Cart Items -->
+    <div class="flex-1">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="font-semibold text-lg dark:text-white">Items in Cart</h2>
+        <button onclick="clearCartConfirm()" class="text-xs text-red-400 hover:text-red-500 font-medium flex items-center gap-1">
+          <i class="fas fa-trash"></i> Clear Cart
+        </button>
+      </div>
+      <div id="cart-items-list" class="flex flex-col gap-4"></div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="lg:w-96 flex-shrink-0">
+      <div class="filter-sidebar sticky top-24">
+        <h2 class="font-semibold text-lg dark:text-white mb-6">Order Summary</h2>
+
+        <div class="flex flex-col gap-3 mb-6 text-sm">
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Subtotal</span>
+            <span class="font-medium dark:text-white" id="summary-subtotal">—</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Delivery</span>
+            <span class="font-medium text-green-500">FREE</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500 dark:text-gray-400">Discount</span>
+            <span class="font-medium dark:text-white" id="summary-discount">—</span>
+          </div>
+          <div class="border-t border-custom pt-3 flex justify-between">
+            <span class="font-bold dark:text-white text-base">Total</span>
+            <span class="font-bold text-accent text-xl" id="summary-total">—</span>
+          </div>
         </div>
-    </main>
 
-    <footer class="w-full border-t border-slate-100 dark:border-slate-900 py-12 bg-white dark:bg-slate-950 text-slate-500 text-xs text-center">
-        Designed with ❤️ by <a href="https://visioreach.co" target="_blank" rel="noopener noreferrer" class="underline font-bold text-slate-700 dark:text-slate-300">VisioReach Concepts</a>
-    </footer>
+        <!-- Coupon -->
+        <div class="mb-6">
+          <label class="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-2">Promo Code</label>
+          <div class="flex gap-2">
+            <input id="coupon-input" type="text" placeholder="e.g. FLYSALE40" class="search-input flex-1 text-xs py-2.5 px-4 rounded-xl" style="border-radius:0.75rem" />
+            <button onclick="applyCoupon()" class="px-4 py-2.5 bg-black dark:bg-white text-white dark:text-black text-xs font-semibold rounded-xl hover:bg-accent hover:text-black transition-colors">Apply</button>
+          </div>
+          <p id="coupon-msg" class="text-xs mt-1 hidden"></p>
+        </div>
 
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/cart.js"></script>
+        <!-- Currency info -->
+        <div class="mb-6 p-3 bg-accent/10 border border-accent/20 rounded-xl text-xs text-accent">
+          <i class="fas fa-info-circle mr-1"></i>
+          Prices shown in <strong id="currency-display">NGN (₦)</strong>. Switch currency in the navbar.
+        </div>
+
+        <!-- Checkout Buttons -->
+        <div class="flex flex-col gap-3">
+          <button onclick="whatsappCheckoutAll()" class="btn-whatsapp justify-center w-full py-4 text-base font-bold rounded-2xl">
+            <i class="fab fa-whatsapp text-xl"></i> Checkout via WhatsApp
+          </button>
+          <a href="shop.html" class="text-center text-sm text-gray-500 hover:text-accent transition-colors py-2">
+            <i class="fas fa-arrow-left mr-1"></i> Continue Shopping
+          </a>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="mt-6 pt-6 border-t border-custom">
+          <p class="text-xs text-gray-400 uppercase tracking-widest mb-3">Accepted Payments</p>
+          <div class="flex flex-wrap gap-2 items-center text-gray-400">
+            <span class="flex items-center gap-1 text-xs border border-custom rounded px-2 py-1"><i class="fas fa-money-bill-wave text-green-400"></i> Cash</span>
+            <span class="flex items-center gap-1 text-xs border border-custom rounded px-2 py-1"><i class="fab fa-cc-visa text-blue-400"></i> Visa</span>
+            <span class="flex items-center gap-1 text-xs border border-custom rounded px-2 py-1"><i class="fab fa-cc-mastercard text-red-400"></i> MC</span>
+            <span class="flex items-center gap-1 text-xs border border-custom rounded px-2 py-1"><i class="fas fa-university text-accent"></i> Transfer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- You Might Also Like -->
+<section class="py-16 bg-secondary-custom" id="suggestions-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-10">
+      <div class="section-tag mx-auto justify-center">Keep Shopping</div>
+      <h2 class="font-display text-4xl font-bold dark:text-white mt-2">You Might Also Like</h2>
+    </div>
+    <div id="suggestions-grid" class="products-grid"></div>
+  </div>
+</section>
+
+<footer class="py-8 border-t border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600">
+    <p>© 2025 FLY FASHION. All rights reserved.</p>
+    <p>Designed with ❤️ by <span class="text-accent font-semibold">VisioReach Concepts</span></p>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up text-sm"></i></button>
+
+<script src="assets/js/main.js"></script>
+<script>
+let discountAmount = 0;
+const VALID_COUPONS = { 'FLYSALE40': 0.40, 'FLY10': 0.10, 'WELCOME15': 0.15 };
+
+window.addEventListener('scroll', () => {
+  document.getElementById('main-navbar')?.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+function renderCart() {
+  const cart = getCart();
+  const emptyEl = document.getElementById('empty-cart');
+  const layoutEl = document.getElementById('cart-layout');
+  const countEl = document.getElementById('cart-item-count');
+
+  if (cart.length === 0) {
+    emptyEl.classList.remove('hidden');
+    layoutEl.classList.add('hidden');
+    layoutEl.classList.remove('flex');
+    countEl.textContent = '0 items';
+    return;
+  }
+
+  emptyEl.classList.add('hidden');
+  layoutEl.classList.remove('hidden');
+  layoutEl.classList.add('flex');
+  countEl.textContent = `${getCartCount()} item${getCartCount() !== 1 ? 's' : ''}`;
+
+  const listEl = document.getElementById('cart-items-list');
+  listEl.innerHTML = cart.map(item => `
+    <div class="cart-item" id="cart-item-${item.key.replace(/[^a-zA-Z0-9]/g, '_')}">
+      <img
+        src="${item.image}"
+        alt="${item.name}"
+        class="w-20 h-24 sm:w-24 sm:h-28 object-cover rounded-xl flex-shrink-0"
+        loading="lazy"
+        onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&q=60'"
+      />
+      <div class="flex-1 min-w-0">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h3 class="font-semibold text-sm dark:text-white leading-tight line-clamp-2">${item.name}</h3>
+            <div class="flex flex-wrap gap-2 mt-1.5 text-xs text-gray-500 dark:text-gray-400">
+              <span class="flex items-center gap-1">
+                <span class="w-3 h-3 rounded-full border border-gray-300 inline-block" style="background:${item.color}"></span>
+                Color
+              </span>
+              <span>Size: <strong class="dark:text-gray-300">${item.size}</strong></span>
+            </div>
+          </div>
+          <button onclick="removeItem('${item.key}')" class="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-400 hover:text-red-500 transition-colors">
+            <i class="fas fa-times text-xs"></i>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between mt-3">
+          <div class="flex items-center gap-0 border border-custom rounded-lg overflow-hidden">
+            <button onclick="changeItemQty('${item.key}', ${item.quantity - 1})" class="w-8 h-8 flex items-center justify-center hover:bg-accent hover:text-black transition-colors text-sm font-bold dark:text-white">−</button>
+            <span class="w-8 text-center text-sm font-semibold dark:text-white">${item.quantity}</span>
+            <button onclick="changeItemQty('${item.key}', ${item.quantity + 1})" class="w-8 h-8 flex items-center justify-center hover:bg-accent hover:text-black transition-colors text-sm font-bold dark:text-white">+</button>
+          </div>
+          <div class="text-right">
+            <p class="font-bold dark:text-white text-sm">${formatPrice(item.price * item.quantity)}</p>
+            ${item.quantity > 1 ? `<p class="text-xs text-gray-400">${formatPrice(item.price)} each</p>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  updateSummary();
+}
+
+function updateSummary() {
+  const subtotal = getCartTotal();
+  const discount = Math.round(subtotal * discountAmount);
+  const total = subtotal - discount;
+
+  document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
+  document.getElementById('summary-discount').textContent = discount > 0 ? `-${formatPrice(discount)}` : '₦0';
+  document.getElementById('summary-total').textContent = formatPrice(total);
+
+  const currencies = { NGN: 'NGN (₦)', USD: 'USD ($)', GBP: 'GBP (£)' };
+  const cur = localStorage.getItem('ff_currency') || 'NGN';
+  document.getElementById('currency-display').textContent = currencies[cur] || currencies.NGN;
+}
+
+function removeItem(key) {
+  removeFromCart(key);
+  renderCart();
+  showToast('Item removed from cart', 'info');
+}
+
+function changeItemQty(key, newQty) {
+  updateCartQty(key, newQty);
+  renderCart();
+}
+
+function clearCartConfirm() {
+  if (confirm('Remove all items from cart?')) {
+    localStorage.removeItem('ff_cart');
+    updateCartBadge();
+    renderCart();
+    showToast('Cart cleared', 'info');
+  }
+}
+
+function applyCoupon() {
+  const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+  const msgEl = document.getElementById('coupon-msg');
+  msgEl.classList.remove('hidden');
+  if (VALID_COUPONS[code]) {
+    discountAmount = VALID_COUPONS[code];
+    msgEl.className = 'text-xs mt-1 text-green-500';
+    msgEl.textContent = `✓ Code applied! ${Math.round(discountAmount * 100)}% discount`;
+    updateSummary();
+    showToast(`Coupon "${code}" applied — ${Math.round(discountAmount * 100)}% off!`, 'success');
+  } else {
+    discountAmount = 0;
+    msgEl.className = 'text-xs mt-1 text-red-500';
+    msgEl.textContent = '✗ Invalid or expired coupon code';
+    updateSummary();
+  }
+}
+
+function whatsappCheckoutAll() {
+  const cart = getCart();
+  if (cart.length === 0) return;
+  const discount = Math.round(getCartTotal() * discountAmount);
+  const items = cart.map(i => ({ ...i, price: i.price }));
+  // Add discount note to message
+  let msg = `Hello FLY FASHION! 🛍️\n\nI'd like to place an order:\n\n`;
+  cart.forEach((item, i) => {
+    msg += `*Item ${i + 1}:*\n`;
+    msg += `Product: ${item.name}\n`;
+    msg += `Size: ${item.size}\n`;
+    msg += `Quantity: ${item.quantity}\n`;
+    msg += `Price: ${formatPrice(item.price * item.quantity)}\n\n`;
+  });
+  const subtotal = getCartTotal();
+  if (discount > 0) {
+    msg += `Subtotal: ${formatPrice(subtotal)}\n`;
+    msg += `Discount: -${formatPrice(discount)}\n`;
+  }
+  msg += `*Total: ${formatPrice(subtotal - discount)}*\n\nPlease confirm availability and provide delivery details. Thank you! 🙏`;
+  window.open(`https://wa.me/2348100000000?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// Init
+renderCart();
+
+// Load suggestions
+loadProducts().then(products => {
+  const cart = getCart();
+  const cartCategories = [...new Set(cart.map(i => {
+    const p = products.find(p => p.id === i.id);
+    return p?.category;
+  }).filter(Boolean))];
+
+  let suggestions = [];
+  if (cartCategories.length > 0) {
+    suggestions = products.filter(p => cartCategories.includes(p.category) && !cart.find(ci => ci.id === p.id)).slice(0, 4);
+  }
+  if (suggestions.length === 0) {
+    suggestions = products.filter(p => p.trending).slice(0, 4);
+  }
+
+  const grid = document.getElementById('suggestions-grid');
+  if (grid) {
+    grid.innerHTML = suggestions.map(p => buildProductCard(p)).join('');
+    setTimeout(initScrollAnimations, 100);
+    updateWishlistIcons();
+  }
+});
+</script>
 </body>
 </html>
