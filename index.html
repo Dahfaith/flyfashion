@@ -1,653 +1,717 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FLY FASHION — Premium Street & Luxury Fashion</title>
-  <meta name="description" content="Shop the latest luxury streetwear, native wears, sneakers, jerseys & more at FLY FASHION. Fast delivery across Nigeria. Pay in ₦, $, or £." />
+  <meta name="description" content="Shop the finest luxury streetwear, native wears, sneakers, hoodies & accessories at FLY FASHION. Fast nationwide delivery. Easy WhatsApp payments in ₦, $, or £." />
+  
+  <!-- SEO & Open Graph -->
   <meta property="og:title" content="FLY FASHION — Premium Street & Luxury Fashion" />
-  <meta property="og:description" content="Shop streetwear, native wears, sneakers & more. Nigeria's premium fashion store." />
+  <meta property="og:description" content="Discover premium streetwear, hoodies, sneakers, and authentic native wears. Quick delivery & instant WhatsApp checkout." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80" />
+  
+  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>" />
+  
+  <!-- Fonts & Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: '#D4AF37',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="bg-primary text-primary">
 
-<!-- Page Loader -->
-<div id="page-loader">
-  <div class="text-3xl font-display font-bold text-accent tracking-widest">FLY FASHION</div>
-  <div class="loader-ring"></div>
-</div>
+  <!-- Bulletproof Loader Overlay -->
+  <div id="page-loader">
+    <div class="text-3xl font-display font-bold text-accent tracking-[0.25em]">FLY FASHION</div>
+    <div class="loader-ring"></div>
+  </div>
 
-<!-- Quick View Modal -->
-<div id="quick-view-modal" class="hidden">
-  <div class="qv-inner shadow-2xl">
-    <div class="relative overflow-hidden rounded-l-3xl sm:rounded-t-3xl sm:rounded-bl-none bg-gray-100 dark:bg-gray-800 min-h-[300px]">
-      <img id="qv-image" src="" alt="" class="w-full h-full object-cover" loading="lazy" />
-    </div>
-    <div class="p-6 sm:p-8 flex flex-col gap-4">
-      <button id="qv-close" class="absolute top-4 right-4 w-9 h-9 bg-black/10 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-black/20 transition-colors">
+  <!-- Quick View Modal Container -->
+  <div id="quick-view-modal">
+    <div class="qv-inner">
+      <button id="qv-close" class="absolute top-4 right-4 w-9 h-9 bg-black/10 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-black/20 dark:hover:bg-white/20 transition-colors z-10" aria-label="Close modal">
         <i class="fas fa-times text-sm"></i>
       </button>
-      <div>
-        <p class="text-accent text-xs font-semibold uppercase tracking-widest">Quick View</p>
-        <h2 id="qv-name" class="font-display text-2xl font-bold dark:text-white mt-1"></h2>
-        <div id="qv-rating" class="flex items-center gap-1 mt-1 text-sm"></div>
+      <div class="relative overflow-hidden bg-gray-50 dark:bg-zinc-900 aspect-[4/5] sm:aspect-auto">
+        <img id="qv-image" src="" alt="Product Quick View" class="w-full h-full object-cover" />
       </div>
-      <div class="flex items-center gap-3">
-        <span id="qv-price" class="font-bold text-2xl dark:text-white"></span>
-        <span id="qv-old-price" class="text-gray-400 line-through text-sm"></span>
-      </div>
-      <p id="qv-description" class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3"></p>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-wider mb-2 dark:text-gray-300">Size</p>
-        <div id="qv-sizes" class="flex flex-wrap gap-2"></div>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-wider mb-2 dark:text-gray-300">Color</p>
-        <div id="qv-colors" class="flex gap-2"></div>
-      </div>
-      <div class="flex gap-3 mt-auto">
-        <button onclick="addToCartFromModal()" class="flex-1 btn-primary text-sm py-3">
-          <i class="fas fa-bag-shopping"></i> Add to Cart
-        </button>
-        <a id="qv-link" href="#" class="flex-1 text-center border-2 border-black dark:border-white text-black dark:text-white font-bold text-sm py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
-          View Details
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Mobile Menu Overlay -->
-<div id="menu-overlay"></div>
-
-<!-- Mobile Sidebar Menu -->
-<nav id="mobile-menu">
-  <div class="flex items-center justify-between mb-8">
-    <span class="font-display font-bold text-2xl text-accent">FLY</span>
-    <button id="menu-close-x" onclick="document.getElementById('menu-toggle').click()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-      <i class="fas fa-times text-sm"></i>
-    </button>
-  </div>
-  
-  <div class="flex flex-col gap-1 mb-8">
-    <a href="index.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">Home</a>
-    <a href="shop.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">Shop</a>
-    <a href="categories.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">Categories</a>
-    <a href="shop.html?filter=newArrival" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">New Arrivals</a>
-    <a href="contact.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">Contact</a>
-  </div>
-
-  <div class="border-t border-custom pt-6 mb-6">
-    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Currency</p>
-    <div class="flex gap-2">
-      <button data-currency="NGN" class="currency-btn">₦ NGN</button>
-      <button data-currency="USD" class="currency-btn">$ USD</button>
-      <button data-currency="GBP" class="currency-btn">£ GBP</button>
-    </div>
-  </div>
-
-  <div class="border-t border-custom pt-6">
-    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Mode</p>
-    <button class="dark-mode-toggle flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 w-full font-medium text-sm">
-      <i class="fas fa-moon"></i> Dark / Light
-    </button>
-  </div>
-</nav>
-
-<!-- Sticky Navbar -->
-<header class="navbar" id="main-navbar">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="flex items-center justify-between h-16 sm:h-20">
-      
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
-        <span class="text-2xl sm:text-3xl font-display font-bold text-accent tracking-wider">FLY</span>
-        <div class="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
-        <span class="hidden sm:block text-xs font-medium tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">Fashion</span>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-8">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="shop.html" class="nav-link">Shop</a>
-        <a href="categories.html" class="nav-link">Categories</a>
-        <a href="shop.html?filter=newArrival" class="nav-link">New Arrivals</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-
-      <!-- Right Actions -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Currency Dropdown -->
-        <div class="hidden md:flex gap-1">
-          <button data-currency="NGN" class="currency-btn text-xs px-2 py-1">₦</button>
-          <button data-currency="USD" class="currency-btn text-xs px-2 py-1">$</button>
-          <button data-currency="GBP" class="currency-btn text-xs px-2 py-1">£</button>
-        </div>
-
-        <!-- Dark Mode -->
-        <button class="dark-mode-toggle w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <i class="fas fa-moon text-sm"></i>
-        </button>
-
-        <!-- Wishlist -->
-        <a href="shop.html" class="hidden sm:flex w-9 h-9 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <i class="far fa-heart text-sm"></i>
-        </a>
-
-        <!-- Cart -->
-        <a href="cart.html" class="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <i class="fas fa-bag-shopping text-sm"></i>
-          <span class="cart-count" style="display:none">0</span>
-        </a>
-
-        <!-- Hamburger -->
-        <button id="menu-toggle" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- ═══════════════════════════════════════════════════════════
-     HERO SECTION
-═══════════════════════════════════════════════════════════ -->
-<section class="hero-section flex items-center">
-  <div class="absolute inset-0">
-    <img 
-      src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80" 
-      alt="Hero fashion" 
-      class="w-full h-full object-cover opacity-25"
-      loading="eager"
-    />
-  </div>
-
-  <!-- Floating decorative elements -->
-  <div class="absolute top-20 right-10 w-72 h-72 rounded-full bg-accent opacity-5 blur-3xl pointer-events-none"></div>
-  <div class="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-accent opacity-5 blur-3xl pointer-events-none"></div>
-
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-24 sm:py-32 lg:py-40">
-    <div class="max-w-3xl">
-      
-      <!-- Badge -->
-      <div class="hero-badge mb-6 animate-fade-in">
-        <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-        New Season 2025 Collection
-      </div>
-
-      <!-- Headline -->
-      <div class="hero-text-reveal mb-2">
-        <span class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold text-white leading-[0.9]" style="animation-delay:0.1s">
-          Dress for the
-        </span>
-      </div>
-      <div class="hero-text-reveal mb-6">
-        <span class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold text-accent leading-[0.9]" style="animation-delay:0.25s">
-          Life You Want.
-        </span>
-      </div>
-
-      <div class="hero-text-reveal mb-10">
-        <span class="text-gray-400 text-base sm:text-lg max-w-xl leading-relaxed block" style="animation-delay:0.4s">
-          From premium streetwear to exquisite native wears — discover curated fashion that speaks your story. Shop the finest in Nigerian and global fashion.
-        </span>
-      </div>
-
-      <!-- CTAs -->
-      <div class="flex flex-wrap gap-4 animate-fade-in delay-500">
-        <a href="shop.html" class="btn-primary">
-          <i class="fas fa-bag-shopping"></i> Shop Now
-        </a>
-        <a href="categories.html" class="btn-outline">
-          Explore Collection <i class="fas fa-arrow-right ml-1"></i>
-        </a>
-      </div>
-
-      <!-- Stats -->
-      <div class="flex flex-wrap gap-8 mt-14 animate-fade-in delay-600">
-        <div>
-          <p class="text-3xl font-display font-bold text-white">5K+</p>
-          <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Happy Customers</p>
-        </div>
-        <div class="w-px bg-gray-700"></div>
-        <div>
-          <p class="text-3xl font-display font-bold text-white">200+</p>
-          <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Products</p>
-        </div>
-        <div class="w-px bg-gray-700"></div>
-        <div>
-          <p class="text-3xl font-display font-bold text-white">4.9★</p>
-          <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Avg Rating</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500 animate-bounce">
-    <span class="text-xs tracking-widest uppercase">Scroll</span>
-    <i class="fas fa-chevron-down text-xs"></i>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     FEATURED CATEGORIES
-═══════════════════════════════════════════════════════════ -->
-<section class="py-16 sm:py-20 bg-secondary-custom">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-10 scroll-reveal">
-      <div class="section-tag mx-auto justify-center">Shop by Category</div>
-      <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">Find Your Style</h2>
-    </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 sm:gap-4">
-      
-      <a href="shop.html?category=Men" class="category-card aspect-[3/4] scroll-reveal">
-        <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=400&q=80" alt="Men" class="w-full h-full object-cover" loading="lazy" />
-        <div class="category-content">
-          <h3 class="font-display text-xl font-bold text-white">Men</h3>
-          <p class="text-xs text-gray-300 mt-0.5">32 Items</p>
-        </div>
-      </a>
-
-      <a href="shop.html?category=Women" class="category-card aspect-[3/4] scroll-reveal">
-        <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=400&q=80" alt="Women" class="w-full h-full object-cover" loading="lazy" />
-        <div class="category-content">
-          <h3 class="font-display text-xl font-bold text-white">Women</h3>
-          <p class="text-xs text-gray-300 mt-0.5">48 Items</p>
-        </div>
-      </a>
-
-      <a href="shop.html?category=Sneakers" class="category-card aspect-[3/4] scroll-reveal">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80" alt="Sneakers" class="w-full h-full object-cover" loading="lazy" />
-        <div class="category-content">
-          <h3 class="font-display text-xl font-bold text-white">Sneakers</h3>
-          <p class="text-xs text-gray-300 mt-0.5">24 Items</p>
-        </div>
-      </a>
-
-      <a href="shop.html?category=Hoodies" class="category-card aspect-[3/4] scroll-reveal">
-        <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80" alt="Hoodies" class="w-full h-full object-cover" loading="lazy" />
-        <div class="category-content">
-          <h3 class="font-display text-xl font-bold text-white">Hoodies</h3>
-          <p class="text-xs text-gray-300 mt-0.5">18 Items</p>
-        </div>
-      </a>
-
-      <a href="shop.html?category=Jerseys" class="category-card aspect-[3/4] scroll-reveal">
-        <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&q=80" alt="Jerseys" class="w-full h-full object-cover" loading="lazy" />
-        <div class="category-content">
-          <h3 class="font-display text-xl font-bold text-white">Jerseys</h3>
-          <p class="text-xs text-gray-300 mt-0.5">15 Items</p>
-        </div>
-      </a>
-
-      <a href="shop.html?category=Native+Wears" class="category-card aspect-[3/4] scroll-reveal">
-        <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=400&q=80" alt="Native Wears" class="w-full h-full object-cover" loading="lazy" />
-        <div class="category-content">
-          <h3 class="font-display text-xl font-bold text-white">Native</h3>
-          <p class="text-xs text-gray-300 mt-0.5">12 Items</p>
-        </div>
-      </a>
-
-      <a href="shop.html?category=Accessories" class="category-card aspect-[3/4] scroll-reveal">
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" alt="Accessories" class="w-full h-full object-cover" loading="lazy" />
-        <div class="category-content">
-          <h3 class="font-display text-xl font-bold text-white">Accessories</h3>
-          <p class="text-xs text-gray-300 mt-0.5">30 Items</p>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     FEATURED PRODUCTS
-═══════════════════════════════════════════════════════════ -->
-<section class="py-16 sm:py-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="flex items-end justify-between mb-10 scroll-reveal">
-      <div>
-        <div class="section-tag">Handpicked For You</div>
-        <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">Featured Products</h2>
-      </div>
-      <a href="shop.html" class="hidden sm:flex items-center gap-2 text-sm font-semibold text-accent hover:underline">
-        View All <i class="fas fa-arrow-right text-xs"></i>
-      </a>
-    </div>
-
-    <div id="featured-grid" class="products-grid"></div>
-
-    <div class="text-center mt-10">
-      <a href="shop.html" class="btn-primary inline-flex">
-        <i class="fas fa-th-large"></i> Browse All Products
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     PROMO BANNER
-═══════════════════════════════════════════════════════════ -->
-<section class="py-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="promo-banner rounded-3xl p-8 sm:p-12 lg:p-16 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div>
-        <p class="text-accent text-xs font-semibold uppercase tracking-widest mb-2">Limited Time Offer</p>
-        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">Up to 40% Off</h2>
-        <p class="text-gray-300 text-sm sm:text-base">On selected native wears & accessories this week only</p>
-      </div>
-      <div class="flex flex-col gap-3 w-full sm:w-auto">
-        <a href="shop.html?filter=sale" class="btn-primary whitespace-nowrap text-center">
-          <i class="fas fa-tag"></i> Shop the Sale
-        </a>
-        <p class="text-center text-gray-400 text-xs">Use code: <span class="text-accent font-bold">FLYSALE40</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     NEW ARRIVALS
-═══════════════════════════════════════════════════════════ -->
-<section class="py-16 sm:py-20 bg-secondary-custom">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-10 scroll-reveal">
-      <div class="section-tag mx-auto justify-center">Just Landed</div>
-      <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">New Arrivals</h2>
-    </div>
-    <div id="new-arrivals-grid" class="products-grid"></div>
-    <div class="text-center mt-10">
-      <a href="shop.html?filter=newArrival" class="btn-primary inline-flex">
-        See All New Arrivals <i class="fas fa-arrow-right ml-2"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     TRENDING CAROUSEL
-═══════════════════════════════════════════════════════════ -->
-<section class="py-16 sm:py-20 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="flex items-end justify-between mb-10 scroll-reveal">
-      <div>
-        <div class="section-tag">Hot Right Now</div>
-        <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">Trending</h2>
-      </div>
-      <div class="flex gap-2">
-        <button id="carousel-prev" class="w-10 h-10 rounded-full border-2 border-custom flex items-center justify-center hover:border-accent hover:text-accent transition-colors">
-          <i class="fas fa-chevron-left text-sm"></i>
-        </button>
-        <button id="carousel-next" class="w-10 h-10 rounded-full border-2 border-custom flex items-center justify-center hover:border-accent hover:text-accent transition-colors">
-          <i class="fas fa-chevron-right text-sm"></i>
-        </button>
-      </div>
-    </div>
-    <div class="carousel-container">
-      <div id="trending-carousel" class="carousel-track"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     TESTIMONIALS
-═══════════════════════════════════════════════════════════ -->
-<section class="py-16 sm:py-20 bg-secondary-custom">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-10 scroll-reveal">
-      <div class="section-tag mx-auto justify-center">What They Say</div>
-      <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">Customer Love</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="testimonial-card scroll-reveal">
-        <div class="flex gap-1 mb-4 text-amber-400">★★★★★</div>
-        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 italic font-display text-lg">"The quality is absolutely stunning. My Lagos Agbada set turned heads at the wedding. Fast delivery too — will definitely shop again!"</p>
-        <div class="flex items-center gap-3">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" class="w-12 h-12 rounded-full object-cover" alt="Customer" loading="lazy" />
+      <div class="p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
+        <div class="flex flex-col gap-4">
           <div>
-            <p class="font-semibold text-sm dark:text-white">Emeka Okafor</p>
-            <p class="text-xs text-gray-400">Lagos, Nigeria</p>
+            <span class="text-[10px] text-accent font-bold uppercase tracking-widest">Premium Selection</span>
+            <h2 id="qv-name" class="font-display text-2xl sm:text-3xl font-bold dark:text-white mt-1 leading-tight"></h2>
+            <div id="qv-rating" class="flex items-center gap-1 mt-2"></div>
           </div>
-          <div class="ml-auto">
-            <span class="text-green-500 text-xs flex items-center gap-1"><i class="fas fa-check-circle"></i> Verified</span>
+          <div class="flex items-center gap-3 py-3 border-t border-b border-custom">
+            <span id="qv-price" class="font-bold text-2xl dark:text-white"></span>
+            <span id="qv-old-price" class="text-gray-400 line-through text-sm"></span>
           </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card scroll-reveal">
-        <div class="flex gap-1 mb-4 text-amber-400">★★★★★</div>
-        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 italic font-display text-lg">"Got the chunky platform sneakers and I literally get compliments every single day. The packaging was also premium. Love this brand!"</p>
-        <div class="flex items-center gap-3">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" class="w-12 h-12 rounded-full object-cover" alt="Customer" loading="lazy" />
+          <p id="qv-description" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed"></p>
           <div>
-            <p class="font-semibold text-sm dark:text-white">Amaka Eze</p>
-            <p class="text-xs text-gray-400">Abuja, Nigeria</p>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-2">Select Size</span>
+            <div id="qv-sizes" class="flex flex-wrap gap-2"></div>
           </div>
-          <div class="ml-auto">
-            <span class="text-green-500 text-xs flex items-center gap-1"><i class="fas fa-check-circle"></i> Verified</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card scroll-reveal">
-        <div class="flex gap-1 mb-4 text-amber-400">★★★★★</div>
-        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 italic font-display text-lg">"Ordered via WhatsApp — super smooth process. The bodycon dress fits perfectly and the material is top-tier. Highly recommend FLY FASHION!"</p>
-        <div class="flex items-center gap-3">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" class="w-12 h-12 rounded-full object-cover" alt="Customer" loading="lazy" />
           <div>
-            <p class="font-semibold text-sm dark:text-white">Chinyere Adeyemi</p>
-            <p class="text-xs text-gray-400">Port Harcourt, Nigeria</p>
-          </div>
-          <div class="ml-auto">
-            <span class="text-green-500 text-xs flex items-center gap-1"><i class="fas fa-check-circle"></i> Verified</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-2">Select Color</span>
+            <div id="qv-colors" class="flex gap-2.5"></div>
           </div>
         </div>
+        <div class="flex gap-3 mt-8 pt-4 border-t border-custom">
+          <button onclick="addToCartFromModal()" class="flex-1 btn-primary text-xs py-3.5">
+            <i class="fas fa-bag-shopping"></i> Add to Cart
+          </button>
+          <a id="qv-link" href="#" class="flex-1 text-center border-2 border-black dark:border-white text-black dark:text-white font-bold text-xs py-3.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors flex items-center justify-center">
+            View Details
+          </a>
+        </div>
       </div>
-
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     INSTAGRAM GALLERY
-═══════════════════════════════════════════════════════════ -->
-<section class="py-16 sm:py-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-10 scroll-reveal">
-      <div class="section-tag mx-auto justify-center">@flyfashionng</div>
-      <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">Follow Our Vibe</h2>
-      <p class="text-gray-500 mt-2 text-sm">Tag us in your fits <span class="text-accent">#FlyFashion</span></p>
-    </div>
+  <!-- Mobile Sidebar overlay -->
+  <div id="menu-overlay"></div>
 
-    <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
-      <div class="insta-item rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
-      <div class="insta-item rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
-      <div class="insta-item rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=300&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
-      <div class="insta-item rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
-      <div class="insta-item rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=300&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
-      <div class="insta-item rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=300&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     NEWSLETTER
-═══════════════════════════════════════════════════════════ -->
-<section class="newsletter-section py-20 sm:py-28">
-  <div class="relative max-w-2xl mx-auto px-4 sm:px-6 text-center">
-    <div class="section-tag mx-auto justify-center text-accent mb-4">Stay in the Loop</div>
-    <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-      Get Exclusive Deals
-    </h2>
-    <p class="text-gray-400 mb-8 text-sm sm:text-base">
-      Subscribe and be the first to know about new arrivals, exclusive sales, and style inspiration.
-    </p>
-    <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-      <input 
-        type="email" 
-        placeholder="Your email address" 
-        required
-        class="flex-1 px-5 py-3.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-accent text-sm"
-      />
-      <button type="submit" class="btn-primary whitespace-nowrap">
-        Subscribe <i class="fas fa-paper-plane ml-1"></i>
+  <!-- Mobile Sidebar Drawer -->
+  <nav id="mobile-menu">
+    <div class="flex items-center justify-between mb-8 pb-4 border-b border-custom">
+      <span class="font-display font-bold text-2xl text-accent">FLY FASHION</span>
+      <button onclick="document.getElementById('menu-toggle').click()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800" aria-label="Close menu">
+        <i class="fas fa-times text-sm"></i>
       </button>
-    </form>
-    <p class="text-gray-600 text-xs mt-4">No spam, ever. Unsubscribe anytime.</p>
-  </div>
-</section>
+    </div>
+    
+    <div class="flex flex-col gap-2 mb-8">
+      <a href="index.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold active text-left">Home</a>
+      <a href="shop.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">Shop</a>
+      <a href="categories.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">Categories</a>
+      <a href="shop.html?filter=new" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">New Arrivals</a>
+      <a href="contact.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">Contact</a>
+    </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════════════════════ -->
-<footer class="py-12 sm:py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-      
-      <div class="col-span-2 sm:col-span-2 lg:col-span-1">
-        <div class="text-3xl font-display font-bold text-accent mb-3">FLY FASHION</div>
-        <p class="text-gray-500 text-sm leading-relaxed mb-5 max-w-xs">
-          Nigeria's premium online fashion destination. Luxury streetwear, native wears, sneakers & more — delivered to your door.
+    <div class="border-t border-custom pt-6 mb-6">
+      <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3.5">Currency Switcher</p>
+      <div class="flex gap-2">
+        <button data-currency="NGN" class="currency-btn flex-1 py-2 text-center text-xs">₦ NGN</button>
+        <button data-currency="USD" class="currency-btn flex-1 py-2 text-center text-xs">$ USD</button>
+        <button data-currency="GBP" class="currency-btn flex-1 py-2 text-center text-xs">£ GBP</button>
+      </div>
+    </div>
+
+    <div class="border-t border-custom pt-6">
+      <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3.5">Style Mode</p>
+      <button class="dark-mode-toggle flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 dark:bg-zinc-900 w-full font-semibold text-xs">
+        <span>Toggle Dark Theme</span>
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="main-navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="text-2xl sm:text-3xl font-display font-bold text-accent tracking-widest">FLY</span>
+          <div class="w-px h-6 bg-gray-200 dark:bg-zinc-800"></div>
+          <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 dark:text-zinc-500">Fashion</span>
+        </a>
+
+        <!-- Desktop Navigation links -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="shop.html" class="nav-link">Shop</a>
+          <a href="categories.html" class="nav-link">Categories</a>
+          <a href="shop.html?filter=new" class="nav-link">New Arrivals</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Right Hand Actions -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Currency switcher dropdown -->
+          <div class="hidden md:flex gap-1">
+            <button data-currency="NGN" class="currency-btn text-[10px] px-2.5 py-1">₦ NGN</button>
+            <button data-currency="USD" class="currency-btn text-[10px] px-2.5 py-1">$ USD</button>
+            <button data-currency="GBP" class="currency-btn text-[10px] px-2.5 py-1">£ GBP</button>
+          </div>
+
+          <!-- Theme toggler button -->
+          <button class="dark-mode-toggle w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon text-sm"></i>
+          </button>
+
+          <!-- Wishlist link -->
+          <a href="shop.html?filter=wishlist" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors" aria-label="Wishlist">
+            <i class="far fa-heart text-sm"></i>
+          </a>
+
+          <!-- Cart Badge button -->
+          <a href="cart.html" class="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors" aria-label="Shopping Cart">
+            <i class="fas fa-bag-shopping text-sm"></i>
+            <span class="cart-count" style="display:none">0</span>
+          </a>
+
+          <!-- Mobile Hamburger Drawer trigger -->
+          <button id="menu-toggle" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors" aria-label="Toggle Navigation Menu">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO BANNER
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="hero-section flex items-center">
+    <div class="absolute inset-0">
+      <img 
+        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80" 
+        alt="Hero Luxury Background" 
+        class="w-full h-full object-cover opacity-25"
+        loading="eager"
+      />
+    </div>
+
+    <!-- Blur decorations -->
+    <div class="absolute top-20 right-10 w-72 h-72 rounded-full bg-accent opacity-5 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-accent opacity-5 blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-24 sm:py-32 lg:py-40">
+      <div class="max-w-3xl">
+        
+        <!-- Collection tag -->
+        <div class="hero-badge mb-6 animate-fade-in">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          NEW SEASON COLLECTION 2026
+        </div>
+
+        <!-- Luxury Headline -->
+        <h1 class="hero-text-reveal mb-2">
+          <span class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold text-white leading-[0.9]">
+            Dress for the
+          </span>
+        </h1>
+        <h2 class="hero-text-reveal mb-8">
+          <span class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold text-accent leading-[0.9]">
+            Life You Want.
+          </span>
+        </h2>
+
+        <p class="hero-text-reveal mb-10">
+          <span class="text-gray-400 text-sm sm:text-base max-w-xl leading-relaxed block">
+            Tailored maroon Agbadas, luxury cotton hoodies, chunky trainers, and custom retro jerseys. Discover curated fashion pieces built to stand out.
+          </span>
         </p>
-        <div class="flex gap-3">
-          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-accent hover:text-black text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-instagram text-sm"></i></a>
-          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-accent hover:text-black text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-tiktok text-sm"></i></a>
-          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-accent hover:text-black text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-twitter text-sm"></i></a>
-          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-accent hover:text-black text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-facebook text-sm"></i></a>
-        </div>
-      </div>
 
-      <div>
-        <h4 class="text-white font-semibold text-sm uppercase tracking-widest mb-5">Shop</h4>
-        <div class="flex flex-col gap-1">
-          <a href="shop.html?category=Men" class="footer-link">Men's Wear</a>
-          <a href="shop.html?category=Women" class="footer-link">Women's Wear</a>
-          <a href="shop.html?category=Sneakers" class="footer-link">Sneakers</a>
-          <a href="shop.html?category=Hoodies" class="footer-link">Hoodies</a>
-          <a href="shop.html?category=Jerseys" class="footer-link">Jerseys</a>
-          <a href="shop.html?category=Native+Wears" class="footer-link">Native Wears</a>
-          <a href="shop.html?category=Accessories" class="footer-link">Accessories</a>
+        <!-- CTA Operations -->
+        <div class="flex flex-wrap gap-4 animate-fade-in delay-200">
+          <a href="shop.html" class="btn-primary">
+            <i class="fas fa-bag-shopping"></i> Shop Now
+          </a>
+          <a href="categories.html" class="btn-outline">
+            Explore Collection <i class="fas fa-arrow-right ml-1"></i>
+          </a>
         </div>
-      </div>
 
-      <div>
-        <h4 class="text-white font-semibold text-sm uppercase tracking-widest mb-5">Help</h4>
-        <div class="flex flex-col gap-1">
-          <a href="contact.html" class="footer-link">Contact Us</a>
-          <a href="#" class="footer-link">Size Guide</a>
-          <a href="#" class="footer-link">Returns Policy</a>
-          <a href="#" class="footer-link">Shipping Info</a>
-          <a href="#" class="footer-link">Track Order</a>
-          <a href="#" class="footer-link">FAQs</a>
-        </div>
-      </div>
-
-      <div>
-        <h4 class="text-white font-semibold text-sm uppercase tracking-widest mb-5">Contact</h4>
-        <div class="flex flex-col gap-3 text-sm text-gray-500">
-          <p><i class="fab fa-whatsapp text-green-400 mr-2"></i>+234 810 000 0000</p>
-          <p><i class="fas fa-envelope text-accent mr-2"></i>hello@flyfashion.ng</p>
-          <p><i class="fas fa-map-marker-alt text-accent mr-2"></i>Lagos, Nigeria</p>
-        </div>
-        <div class="mt-5">
-          <p class="text-gray-600 text-xs uppercase tracking-widest mb-2">We Accept</p>
-          <div class="flex gap-2 text-gray-400 text-lg">
-            <i class="fas fa-money-bill-wave" title="Cash on Delivery"></i>
-            <i class="fab fa-cc-visa" title="Visa"></i>
-            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+        <!-- Premium Metrics -->
+        <div class="flex flex-wrap gap-8 mt-16 pt-8 border-t border-zinc-800/60 max-w-xl animate-fade-in delay-300">
+          <div>
+            <p class="text-2xl sm:text-3xl font-display font-bold text-white">5K+</p>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Customers</p>
+          </div>
+          <div class="w-px bg-zinc-800"></div>
+          <div>
+            <p class="text-2xl sm:text-3xl font-display font-bold text-white">200+</p>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Designs</p>
+          </div>
+          <div class="w-px bg-zinc-800"></div>
+          <div>
+            <p class="text-2xl sm:text-3xl font-display font-bold text-white">4.9★</p>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Review Rating</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600">
-      <p>© 2025 FLY FASHION. All rights reserved.</p>
-      <p>Designed with ❤️ by <span class="text-accent font-semibold">VisioReach Concepts</span></p>
-      <div class="flex gap-4">
-        <a href="#" class="hover:text-gray-400">Privacy</a>
-        <a href="#" class="hover:text-gray-400">Terms</a>
+    <!-- Scroll down mouse -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-zinc-500 animate-bounce">
+      <span class="text-[9px] tracking-widest uppercase">Scroll</span>
+      <i class="fas fa-chevron-down text-xs"></i>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FEATURED CATEGORIES
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-24 bg-secondary-custom">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 scroll-reveal">
+        <div class="section-tag mx-auto justify-center">Tailored Lines</div>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-1">Shop by Category</h2>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 sm:gap-4">
+        
+        <a href="shop.html?category=Men" class="category-card aspect-[3/4] scroll-reveal">
+          <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=450&q=80" alt="Men Category" class="w-full h-full object-cover" loading="lazy" />
+          <div class="category-content">
+            <h3 class="font-display text-lg font-bold text-white leading-tight">Men</h3>
+            <p class="text-[9px] text-accent tracking-wider font-semibold uppercase mt-0.5">Explore</p>
+          </div>
+        </a>
+
+        <a href="shop.html?category=Women" class="category-card aspect-[3/4] scroll-reveal">
+          <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=450&q=80" alt="Women Category" class="w-full h-full object-cover" loading="lazy" />
+          <div class="category-content">
+            <h3 class="font-display text-lg font-bold text-white leading-tight">Women</h3>
+            <p class="text-[9px] text-accent tracking-wider font-semibold uppercase mt-0.5">Explore</p>
+          </div>
+        </a>
+
+        <a href="shop.html?category=Sneakers" class="category-card aspect-[3/4] scroll-reveal">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=450&q=80" alt="Sneakers Category" class="w-full h-full object-cover" loading="lazy" />
+          <div class="category-content">
+            <h3 class="font-display text-lg font-bold text-white leading-tight">Sneakers</h3>
+            <p class="text-[9px] text-accent tracking-wider font-semibold uppercase mt-0.5">Explore</p>
+          </div>
+        </a>
+
+        <a href="shop.html?category=Hoodies" class="category-card aspect-[3/4] scroll-reveal">
+          <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=450&q=80" alt="Hoodies Category" class="w-full h-full object-cover" loading="lazy" />
+          <div class="category-content">
+            <h3 class="font-display text-lg font-bold text-white leading-tight">Hoodies</h3>
+            <p class="text-[9px] text-accent tracking-wider font-semibold uppercase mt-0.5">Explore</p>
+          </div>
+        </a>
+
+        <a href="shop.html?category=Jerseys" class="category-card aspect-[3/4] scroll-reveal">
+          <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=450&q=80" alt="Jerseys Category" class="w-full h-full object-cover" loading="lazy" />
+          <div class="category-content">
+            <h3 class="font-display text-lg font-bold text-white leading-tight">Jerseys</h3>
+            <p class="text-[9px] text-accent tracking-wider font-semibold uppercase mt-0.5">Explore</p>
+          </div>
+        </a>
+
+        <a href="shop.html?category=Native+Wears" class="category-card aspect-[3/4] scroll-reveal">
+          <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=450&q=80" alt="Native Wears Category" class="w-full h-full object-cover" loading="lazy" />
+          <div class="category-content">
+            <h3 class="font-display text-lg font-bold text-white leading-tight">Native Wears</h3>
+            <p class="text-[9px] text-accent tracking-wider font-semibold uppercase mt-0.5">Explore</p>
+          </div>
+        </a>
+
+        <a href="shop.html?category=Accessories" class="category-card aspect-[3/4] scroll-reveal">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=450&q=80" alt="Accessories Category" class="w-full h-full object-cover" loading="lazy" />
+          <div class="category-content">
+            <h3 class="font-display text-lg font-bold text-white leading-tight">Accessories</h3>
+            <p class="text-[9px] text-accent tracking-wider font-semibold uppercase mt-0.5">Explore</p>
+          </div>
+        </a>
+
       </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<!-- Back to Top -->
-<button id="back-to-top" aria-label="Back to top">
-  <i class="fas fa-chevron-up text-sm"></i>
-</button>
-
-<script src="assets/js/main.js"></script>
-<script>
-// ── Navbar scroll effect ──────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('main-navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// ── Newsletter ────────────────────────────────────────────
-function handleNewsletter(e) {
-  e.preventDefault();
-  showToast('Subscribed successfully! Check your email 🎉', 'success');
-  e.target.reset();
-}
-
-// ── Carousel ──────────────────────────────────────────────
-let carouselIndex = 0;
-let carouselItems = [];
-
-function updateCarousel() {
-  const track = document.getElementById('trending-carousel');
-  if (!track || carouselItems.length === 0) return;
-  const cardW = 260 + 20; // width + gap
-  const maxIndex = Math.max(0, carouselItems.length - Math.floor(track.parentElement.offsetWidth / cardW));
-  carouselIndex = Math.min(carouselIndex, maxIndex);
-  track.style.transform = `translateX(-${carouselIndex * cardW}px)`;
-}
-
-document.getElementById('carousel-next')?.addEventListener('click', () => {
-  carouselIndex++;
-  updateCarousel();
-});
-document.getElementById('carousel-prev')?.addEventListener('click', () => {
-  carouselIndex = Math.max(0, carouselIndex - 1);
-  updateCarousel();
-});
-
-// ── Load products ─────────────────────────────────────────
-loadProducts().then(products => {
-  const featured = products.filter(p => p.featured).slice(0, 8);
-  const newArr = products.filter(p => p.newArrival).slice(0, 8);
-  const trending = products.filter(p => p.trending);
-
-  const featGrid = document.getElementById('featured-grid');
-  if (featGrid) featGrid.innerHTML = featured.map(p => buildProductCard(p)).join('');
-
-  const naGrid = document.getElementById('new-arrivals-grid');
-  if (naGrid) naGrid.innerHTML = newArr.map(p => buildProductCard(p)).join('');
-
-  const carouselEl = document.getElementById('trending-carousel');
-  if (carouselEl) {
-    carouselItems = trending;
-    carouselEl.innerHTML = trending.map(p => `
-      <div class="flex-none w-64">
-        ${buildProductCard(p)}
+  <!-- ═══════════════════════════════════════════════════════════
+       FEATURED PRODUCTS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-end justify-between mb-12 scroll-reveal">
+        <div>
+          <div class="section-tag">Handpicked Selection</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-1">Featured Products</h2>
+        </div>
+        <a href="shop.html" class="hidden sm:flex items-center gap-1.5 text-xs font-bold text-accent hover:underline">
+          View All Products <i class="fas fa-arrow-right text-[10px]"></i>
+        </a>
       </div>
-    `).join('');
-    updateCarousel();
-  }
 
-  // Re-init scroll animations
-  setTimeout(initScrollAnimations, 100);
-  updateWishlistIcons();
-});
-</script>
+      <div id="featured-grid" class="products-grid"></div>
+
+      <div class="text-center mt-12">
+        <a href="shop.html" class="btn-primary inline-flex sm:hidden">
+          View All Products <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PROMOTIONAL SHIMMER BANNER
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="py-6 sm:py-10 bg-secondary-custom">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="promo-banner rounded-3xl p-8 sm:p-14 lg:p-20 flex flex-col sm:flex-row items-center justify-between gap-8 relative overflow-hidden">
+        
+        <!-- Shimmer highlights -->
+        <div class="absolute -top-10 -left-10 w-60 h-60 rounded-full bg-white/5 blur-3xl pointer-events-none"></div>
+
+        <div>
+          <span class="text-accent text-[10px] font-bold uppercase tracking-widest mb-2 block">Special Mid-Year Offer</span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">Save up to 40% Off</h2>
+          <p class="text-gray-300 text-xs sm:text-sm max-w-md leading-relaxed">
+            Get premium tailoring and urban accessories. Order directly using WhatsApp with promo code.
+          </p>
+        </div>
+        
+        <div class="flex flex-col gap-3.5 w-full sm:w-auto">
+          <a href="shop.html?filter=sale" class="btn-primary whitespace-nowrap text-center">
+            <i class="fas fa-tag"></i> Shop Sale Collection
+          </a>
+          <p class="text-center text-[10px] text-gray-400 font-semibold tracking-wider">
+            Promo Code: <span class="text-accent">FLYSALE40</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NEW ARRIVALS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 scroll-reveal">
+        <div class="section-tag mx-auto justify-center">Fresh Releases</div>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-1">New Arrivals</h2>
+      </div>
+
+      <div id="new-arrivals-grid" class="products-grid"></div>
+
+      <div class="text-center mt-12">
+        <a href="shop.html?filter=new" class="btn-outline border-black dark:border-white text-black dark:text-white hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black inline-flex">
+          Explore All New Fits <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TRENDING CAROUSEL
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-24 bg-secondary-custom overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-end justify-between mb-12 scroll-reveal">
+        <div>
+          <div class="section-tag">Hot & Highly Requested</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-1">Trending Products</h2>
+        </div>
+        
+        <div class="flex gap-2">
+          <button id="carousel-prev" class="w-10 h-10 rounded-full border border-custom flex items-center justify-center hover:border-accent hover:text-accent transition-colors" aria-label="Previous">
+            <i class="fas fa-chevron-left text-xs"></i>
+          </button>
+          <button id="carousel-next" class="w-10 h-10 rounded-full border border-custom flex items-center justify-center hover:border-accent hover:text-accent transition-colors" aria-label="Next">
+            <i class="fas fa-chevron-right text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="carousel-container">
+        <div id="trending-carousel" class="carousel-track"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TESTIMONIALS (CUSTOMER REVIEWS)
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 scroll-reveal">
+        <div class="section-tag mx-auto justify-center">Verified Reviews</div>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-1">Customer Love</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="testimonial-card scroll-reveal">
+          <div class="flex gap-1 mb-4 text-amber-400 text-sm">★★★★★</div>
+          <p class="text-gray-600 dark:text-zinc-400 leading-relaxed mb-6 italic font-display text-lg">
+            "The tailor quality of the Velvet Agbada is absolutely stunning. Received comments all day long at the Lagos gala dinner. Best African luxury brand online."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-accent text-black font-bold flex items-center justify-center font-display text-lg">EO</div>
+            <div>
+              <p class="font-semibold text-xs dark:text-white">Emeka Okafor</p>
+              <p class="text-[9px] text-gray-400">Lagos, Nigeria</p>
+            </div>
+            <div class="ml-auto text-green-500 text-[10px] font-semibold flex items-center gap-1">
+              <i class="fas fa-check-circle"></i> Verified
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card scroll-reveal">
+          <div class="flex gap-1 mb-4 text-amber-400 text-sm">★★★★★</div>
+          <p class="text-gray-600 dark:text-zinc-400 leading-relaxed mb-6 italic font-display text-lg">
+            "Sizing chart for the Chunky platform sneakers was completely spot on. Extremely comfy and high tier leather components. Ordered via WhatsApp seamlessly."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-zinc-800 text-white font-bold flex items-center justify-center font-display text-lg">AE</div>
+            <div>
+              <p class="font-semibold text-xs dark:text-white">Amaka Eze</p>
+              <p class="text-[9px] text-gray-400">Abuja, Nigeria</p>
+            </div>
+            <div class="ml-auto text-green-500 text-[10px] font-semibold flex items-center gap-1">
+              <i class="fas fa-check-circle"></i> Verified
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card scroll-reveal">
+          <div class="flex gap-1 mb-4 text-amber-400 text-sm">★★★★★</div>
+          <p class="text-gray-600 dark:text-zinc-400 leading-relaxed mb-6 italic font-display text-lg">
+            "Got the retro Nigeria 1996 jersey in 4 days. Absolutely gorgeous nostalgic wing design. High quality mesh fabric. Recommending completely!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center font-display text-lg">CA</div>
+            <div>
+              <p class="font-semibold text-xs dark:text-white">Chinyere Adeyemi</p>
+              <p class="text-[9px] text-gray-400">Port Harcourt, Nigeria</p>
+            </div>
+            <div class="ml-auto text-green-500 text-[10px] font-semibold flex items-center gap-1">
+              <i class="fas fa-check-circle"></i> Verified
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       INSTAGRAM FASHION SHOWCASE
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-24 bg-secondary-custom">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 scroll-reveal">
+        <div class="section-tag mx-auto justify-center">#FlyFashionNG</div>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-1">Explore Our Vibe</h2>
+        <p class="text-xs text-gray-500 mt-2">Tag us in your custom streetwear sets on social media</p>
+      </div>
+
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2.5">
+        <div class="insta-item rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=350&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
+        <div class="insta-item rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=350&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
+        <div class="insta-item rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=350&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
+        <div class="insta-item rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=350&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
+        <div class="insta-item rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=350&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
+        <div class="insta-item rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=350&q=80" class="w-full h-full object-cover" loading="lazy" alt=""/><div class="insta-icon"><i class="fab fa-instagram"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NEWSLETTER SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="newsletter-section py-20 sm:py-28 text-center">
+    <div class="relative max-w-2xl mx-auto px-4 sm:px-6">
+      <div class="section-tag mx-auto justify-center mb-3">Newsletter</div>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
+        Keep Up with the Flight
+      </h2>
+      <p class="text-gray-400 text-xs sm:text-sm max-w-md mx-auto mb-8 leading-relaxed">
+        Subscribe to receive immediate notices on fresh arrivals, custom limited-run sales, and tailoring drops.
+      </p>
+      
+      <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input 
+          type="email" 
+          placeholder="Enter your email address" 
+          required
+          class="flex-1 px-5 py-3 rounded-full bg-white/10 border border-white/15 text-white placeholder-gray-500 focus:outline-none focus:border-accent text-xs"
+        />
+        <button type="submit" class="btn-primary py-3">
+          Subscribe <i class="fas fa-paper-plane ml-1"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <footer class="py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        
+        <div class="col-span-2 lg:col-span-1">
+          <div class="text-3xl font-display font-bold text-accent mb-4">FLY FASHION</div>
+          <p class="text-gray-500 text-xs leading-relaxed mb-6 max-w-xs">
+            Premium luxury streetwear and bespoke Agbada sets. High craftsmanship standards with fast shipping across Nigeria.
+          </p>
+          <div class="flex gap-3">
+            <a href="#" class="w-9 h-9 bg-zinc-900 border border-zinc-800 hover:border-accent hover:text-accent text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+            <a href="#" class="w-9 h-9 bg-zinc-900 border border-zinc-800 hover:border-accent hover:text-accent text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-tiktok text-xs"></i></a>
+            <a href="#" class="w-9 h-9 bg-zinc-900 border border-zinc-800 hover:border-accent hover:text-accent text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-twitter text-xs"></i></a>
+            <a href="#" class="w-9 h-9 bg-zinc-900 border border-zinc-800 hover:border-accent hover:text-accent text-gray-400 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-5">Shop Catalog</h4>
+          <div class="flex flex-col gap-2">
+            <a href="shop.html?category=Men" class="footer-link">Men's Apparel</a>
+            <a href="shop.html?category=Women" class="footer-link">Women's Collection</a>
+            <a href="shop.html?category=Sneakers" class="footer-link">Sneakers & Kicks</a>
+            <a href="shop.html?category=Hoodies" class="footer-link">Oversized Hoodies</a>
+            <a href="shop.html?category=Native+Wears" class="footer-link">Luxury Agbada & Senegalese</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-5">Help & Inquiries</h4>
+          <div class="flex flex-col gap-2">
+            <a href="contact.html" class="footer-link">Contact Support</a>
+            <a href="#" class="footer-link">Returns Policy</a>
+            <a href="#" class="footer-link">Tailoring Size Guide</a>
+            <a href="#" class="footer-link">Shipping Logistics</a>
+            <a href="#" class="footer-link">FAQs</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-5">Contact Details</h4>
+          <div class="flex flex-col gap-3.5 text-xs text-gray-500">
+            <p class="flex items-center gap-2"><i class="fab fa-whatsapp text-green-400"></i> +234 706 965 9752</p>
+            <p class="flex items-center gap-2"><i class="fas fa-envelope text-accent"></i> hello@flyfashion.ng</p>
+            <p class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-accent"></i> Lagos, Nigeria</p>
+          </div>
+          <div class="mt-5">
+            <p class="text-gray-600 text-[10px] uppercase tracking-widest mb-2 font-bold">Payments accepted via WhatsApp</p>
+            <div class="flex gap-2.5 text-gray-400 text-lg">
+              <i class="fas fa-money-bill-wave" title="Bank Transfer / Cash"></i>
+              <i class="fab fa-cc-visa" title="Visa"></i>
+              <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-zinc-950 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-gray-600">
+        <p>© 2026 FLY FASHION. All rights reserved.</p>
+        <p>Designed with ❤️ by <span class="text-accent font-semibold">VisioReach Concepts</span></p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+          <a href="#" class="hover:text-gray-400">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up text-sm"></i>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Navbar visual feedback on scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('main-navbar')?.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Newsletter submit operations
+    function handleNewsletter(e) {
+      e.preventDefault();
+      showToast('Subscribed successfully! Watch your mailbox 🎉', 'success');
+      e.target.reset();
+    }
+
+    // Dynamic Carousel state tracker
+    let carouselIndex = 0;
+    let carouselItems = [];
+
+    function updateCarousel() {
+      const track = document.getElementById('trending-carousel');
+      if (!track || carouselItems.length === 0) return;
+      
+      const firstCard = track.querySelector('div');
+      if (!firstCard) return;
+      
+      const cardW = firstCard.offsetWidth + 20; // Width + gap
+      const parentW = track.parentElement.offsetWidth;
+      const maxIndex = Math.max(0, carouselItems.length - Math.floor(parentW / cardW));
+      
+      carouselIndex = Math.min(carouselIndex, maxIndex);
+      track.style.transform = `translateX(-${carouselIndex * cardW}px)`;
+    }
+
+    document.getElementById('carousel-next')?.addEventListener('click', () => {
+      const track = document.getElementById('trending-carousel');
+      if (!track) return;
+      const cardW = track.querySelector('div')?.offsetWidth + 20;
+      const maxIndex = Math.max(0, carouselItems.length - Math.floor(track.parentElement.offsetWidth / cardW));
+      
+      if (carouselIndex < maxIndex) {
+        carouselIndex++;
+        updateCarousel();
+      }
+    });
+
+    document.getElementById('carousel-prev')?.addEventListener('click', () => {
+      if (carouselIndex > 0) {
+        carouselIndex--;
+        updateCarousel();
+      }
+    });
+
+    window.addEventListener('resize', updateCarousel, { passive: true });
+
+    // Load dynamic items from products module
+    loadProducts().then(products => {
+      const featured = products.filter(p => p.featured).slice(0, 8);
+      const newArrivals = products.filter(p => p.newArrival).slice(0, 8);
+      const trending = products.filter(p => p.trending);
+
+      // Draw featured
+      const featuredGrid = document.getElementById('featured-grid');
+      if (featuredGrid) {
+        featuredGrid.innerHTML = featured.map(p => buildProductCard(p)).join('');
+      }
+
+      // Draw new arrivals
+      const naGrid = document.getElementById('new-arrivals-grid');
+      if (naGrid) {
+        naGrid.innerHTML = newArrivals.map(p => buildProductCard(p)).join('');
+      }
+
+      // Populate trending
+      const trendingTrack = document.getElementById('trending-carousel');
+      if (trendingTrack) {
+        carouselItems = trending;
+        trendingTrack.innerHTML = trending.map(p => `
+          <div class="flex-shrink-0 w-64">
+            ${buildProductCard(p)}
+          </div>
+        `).join('');
+        
+        setTimeout(updateCarousel, 100);
+      }
+
+      // Trigger reveal animations
+      setTimeout(initScrollAnimations, 200);
+      updateWishlistIcons();
+    });
+  </script>
 </body>
 </html>
