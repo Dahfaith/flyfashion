@@ -113,7 +113,8 @@ h1, h2, h3, .font-display {
 /* ── Hero ────────────────────────────────────────────────── */
 .hero-section {
   min-height: 100svh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+  min-height: 100vh;
+  background: #0a0a0a !important;
   position: relative;
   overflow: hidden;
 }
@@ -124,7 +125,11 @@ h1, h2, h3, .font-display {
   inset: 0;
   background: radial-gradient(ellipse at 60% 50%, rgba(212,175,55,0.15) 0%, transparent 60%);
   pointer-events: none;
+  z-index: 0;
 }
+
+/* Keep all hero children above the pseudo-element */
+.hero-section > * { position: relative; z-index: 1; }
 
 .hero-text-reveal {
   overflow: hidden;
@@ -710,16 +715,21 @@ footer {
 }
 
 /* ── Quick View Modal ────────────────────────────────────── */
+/* Modal hidden by default — JS adds .open class to show it */
 #quick-view-modal {
   position: fixed;
   inset: 0;
   z-index: 2000;
   background: rgba(0,0,0,0.7);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 1rem;
   backdrop-filter: blur(6px);
+}
+
+#quick-view-modal.open {
+  display: flex;
 }
 
 .qv-inner {
