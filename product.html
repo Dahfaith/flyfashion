@@ -3,353 +3,387 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product — FLY FASHION</title>
-  <meta name="description" content="View product details at FLY FASHION." />
+  <title>Product Details — FLY FASHION</title>
+  <meta name="description" content="View absolute tailoring specifications, luxury sizing choices, and make secure purchases on FLY FASHION." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>" />
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: '#D4AF37',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="bg-primary text-primary">
 
-<div id="page-loader">
-  <div class="text-3xl font-display font-bold text-accent tracking-widest">FLY FASHION</div>
-  <div class="loader-ring"></div>
-</div>
+  <!-- Bulletproof Loader Overlay -->
+  <div id="page-loader">
+    <div class="text-3xl font-display font-bold text-accent tracking-[0.25em]">FLY FASHION</div>
+    <div class="loader-ring"></div>
+  </div>
 
-<div id="menu-overlay"></div>
-<nav id="mobile-menu">
-  <div class="flex items-center justify-between mb-8">
-    <span class="font-display font-bold text-2xl text-accent">FLY</span>
-    <button onclick="document.getElementById('menu-toggle').click()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800"><i class="fas fa-times text-sm"></i></button>
-  </div>
-  <div class="flex flex-col gap-1 mb-8">
-    <a href="index.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
-    <a href="shop.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Shop</a>
-    <a href="categories.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Categories</a>
-    <a href="shop.html?filter=newArrival" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">New Arrivals</a>
-    <a href="contact.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
-  </div>
-  <div class="border-t border-custom pt-6 mb-6">
-    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Currency</p>
-    <div class="flex gap-2">
-      <button data-currency="NGN" class="currency-btn">₦ NGN</button>
-      <button data-currency="USD" class="currency-btn">$ USD</button>
-      <button data-currency="GBP" class="currency-btn">£ GBP</button>
+  <div id="menu-overlay"></div>
+
+  <!-- Mobile Sidebar Drawer -->
+  <nav id="mobile-menu">
+    <div class="flex items-center justify-between mb-8 pb-4 border-b border-custom">
+      <span class="font-display font-bold text-2xl text-accent">FLY FASHION</span>
+      <button onclick="document.getElementById('menu-toggle').click()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800" aria-label="Close menu">
+        <i class="fas fa-times text-sm"></i>
+      </button>
     </div>
-  </div>
-  <div class="border-t border-custom pt-6">
-    <button class="dark-mode-toggle flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 w-full font-medium text-sm"><i class="fas fa-moon"></i> Dark / Light</button>
-  </div>
-</nav>
+    
+    <div class="flex flex-col gap-2 mb-8">
+      <a href="index.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">Home</a>
+      <a href="shop.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold active text-left">Shop</a>
+      <a href="categories.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">Categories</a>
+      <a href="shop.html?filter=new" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">New Arrivals</a>
+      <a href="contact.html" class="nav-link px-3 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 font-semibold text-left">Contact</a>
+    </div>
 
-<header class="navbar" id="main-navbar">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="flex items-center justify-between h-16 sm:h-20">
-      <a href="index.html" class="flex items-center gap-2">
-        <span class="text-2xl sm:text-3xl font-display font-bold text-accent">FLY</span>
-        <div class="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
-        <span class="hidden sm:block text-xs font-medium tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">Fashion</span>
-      </a>
-      <nav class="hidden lg:flex items-center gap-8">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="shop.html" class="nav-link active">Shop</a>
-        <a href="categories.html" class="nav-link">Categories</a>
-        <a href="shop.html?filter=newArrival" class="nav-link">New Arrivals</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-      <div class="flex items-center gap-2 sm:gap-3">
-        <div class="hidden md:flex gap-1">
-          <button data-currency="NGN" class="currency-btn text-xs px-2 py-1">₦</button>
-          <button data-currency="USD" class="currency-btn text-xs px-2 py-1">$</button>
-          <button data-currency="GBP" class="currency-btn text-xs px-2 py-1">£</button>
-        </div>
-        <button class="dark-mode-toggle w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"><i class="fas fa-moon text-sm"></i></button>
-        <a href="cart.html" class="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-          <i class="fas fa-bag-shopping text-sm"></i>
-          <span class="cart-count" style="display:none">0</span>
+    <div class="border-t border-custom pt-6 mb-6">
+      <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3.5">Currency Switcher</p>
+      <div class="flex gap-2">
+        <button data-currency="NGN" class="currency-btn flex-1 py-2 text-center text-xs">₦ NGN</button>
+        <button data-currency="USD" class="currency-btn flex-1 py-2 text-center text-xs">$ USD</button>
+        <button data-currency="GBP" class="currency-btn flex-1 py-2 text-center text-xs">£ GBP</button>
+      </div>
+    </div>
+
+    <div class="border-t border-custom pt-6">
+      <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3.5">Style Mode</p>
+      <button class="dark-mode-toggle flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 dark:bg-zinc-900 w-full font-semibold text-xs">
+        <span>Toggle Dark Theme</span>
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="main-navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="text-2xl sm:text-3xl font-display font-bold text-accent tracking-widest">FLY</span>
+          <div class="w-px h-6 bg-gray-200 dark:bg-zinc-800"></div>
+          <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 dark:text-zinc-500">Fashion</span>
         </a>
-        <button id="menu-toggle" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="shop.html" class="nav-link active">Shop</a>
+          <a href="categories.html" class="nav-link">Categories</a>
+          <a href="shop.html?filter=new" class="nav-link">New Arrivals</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="hidden md:flex gap-1">
+            <button data-currency="NGN" class="currency-btn text-[10px] px-2.5 py-1">₦</button>
+            <button data-currency="USD" class="currency-btn text-[10px] px-2.5 py-1">$</button>
+            <button data-currency="GBP" class="currency-btn text-[10px] px-2.5 py-1">£</button>
+          </div>
+          <button class="dark-mode-toggle w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon text-sm"></i>
+          </button>
+          <a href="cart.html" class="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors" aria-label="Shopping Cart">
+            <i class="fas fa-bag-shopping text-sm"></i>
+            <span class="cart-count" style="display:none">0</span>
+          </a>
+          <button id="menu-toggle" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors" aria-label="Toggle Navigation">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- Product Content -->
-<div id="product-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-  <div class="animate-pulse flex flex-col lg:flex-row gap-10">
-    <div class="flex-1 bg-gray-200 dark:bg-gray-800 rounded-3xl aspect-square"></div>
-    <div class="flex-1 flex flex-col gap-4">
-      <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-24"></div>
-      <div class="h-8 bg-gray-200 dark:bg-gray-800 rounded w-3/4"></div>
-      <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/2"></div>
-      <div class="h-6 bg-gray-200 dark:bg-gray-800 rounded w-1/3"></div>
+  <!-- Product Details Content Area -->
+  <main id="product-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Skeleton loader display while fetching products -->
+    <div class="animate-pulse flex flex-col lg:flex-row gap-10">
+      <div class="flex-1 bg-zinc-200 dark:bg-zinc-800 rounded-3xl aspect-[4/5]"></div>
+      <div class="flex-1 flex flex-col gap-6">
+        <div class="h-4 bg-zinc-200 dark:bg-zinc-800 rounded w-24"></div>
+        <div class="h-10 bg-zinc-200 dark:bg-zinc-800 rounded w-3/4"></div>
+        <div class="h-6 bg-zinc-200 dark:bg-zinc-800 rounded w-1/3"></div>
+        <div class="h-24 bg-zinc-200 dark:bg-zinc-800 rounded w-full"></div>
+      </div>
     </div>
-  </div>
-</div>
+  </main>
 
-<!-- Related Products -->
-<section class="py-16 bg-secondary-custom" id="related-section" style="display:none">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-10">
-      <div class="section-tag mx-auto justify-center">You May Also Like</div>
-      <h2 class="font-display text-4xl font-bold dark:text-white mt-2">Related Products</h2>
-    </div>
-    <div id="related-grid" class="products-grid"></div>
-  </div>
-</section>
-
-<footer class="py-8 mt-0 border-t border-gray-800">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600">
-    <p>© 2025 FLY FASHION. All rights reserved.</p>
-    <p>Designed with ❤️ by <span class="text-accent font-semibold">VisioReach Concepts</span></p>
-  </div>
-</footer>
-
-<button id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up text-sm"></i></button>
-
-<script src="assets/js/main.js"></script>
-<script>
-window.addEventListener('scroll', () => {
-  document.getElementById('main-navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-let currentProduct = null;
-let selectedSize = '';
-let selectedColor = '';
-let quantity = 1;
-
-const productId = parseInt(new URLSearchParams(window.location.search).get('id'));
-
-function setMainImage(src) {
-  const main = document.getElementById('main-product-image');
-  if (main) {
-    main.style.opacity = '0';
-    setTimeout(() => { main.src = src; main.style.opacity = '1'; }, 150);
-  }
-  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.gallery-thumb img').forEach(i => { if (i.src.includes(src.split('?')[0].split('/').pop())) i.closest('.gallery-thumb')?.classList.add('active'); });
-}
-
-function selectSize(btn, size) {
-  document.querySelectorAll('.prod-size-btn').forEach(b => b.classList.remove('bg-black','text-white','dark:bg-white','dark:text-black','border-black','dark:border-white'));
-  btn.classList.add('bg-black','text-white','border-black');
-  selectedSize = size;
-}
-
-function selectColor(btn, color) {
-  document.querySelectorAll('.prod-color-btn').forEach(b => b.classList.remove('ring-2','ring-offset-2','ring-black','dark:ring-white'));
-  btn.classList.add('ring-2','ring-offset-2','ring-black');
-  selectedColor = color;
-}
-
-function changeQty(delta) {
-  quantity = Math.max(1, Math.min(quantity + delta, currentProduct?.stock || 99));
-  document.getElementById('qty-display').textContent = quantity;
-}
-
-function doAddToCart() {
-  if (!currentProduct) return;
-  if (!selectedSize) { showToast('Please select a size', 'warning'); return; }
-  addToCart(currentProduct, selectedSize, selectedColor || currentProduct.colors[0], quantity);
-}
-
-function doWhatsApp() {
-  if (!currentProduct) return;
-  if (!selectedSize) { showToast('Please select a size', 'warning'); return; }
-  openWhatsApp([{
-    name: currentProduct.name,
-    color: selectedColor || currentProduct.colors[0],
-    size: selectedSize,
-    quantity,
-    price: currentProduct.price,
-  }]);
-}
-
-function renderProduct(p) {
-  currentProduct = p;
-  selectedSize = p.sizes[0];
-  selectedColor = p.colors[0];
-
-  const discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
-
-  document.title = `${p.name} — FLY FASHION`;
-
-  document.getElementById('product-content').innerHTML = `
-    <p class="text-xs text-gray-400 mb-6"><a href="index.html" class="hover:text-accent">Home</a> / <a href="shop.html" class="hover:text-accent">Shop</a> / <a href="shop.html?category=${encodeURIComponent(p.category)}" class="hover:text-accent">${p.category}</a> / <span class="text-primary">${p.name}</span></p>
-
-    <div class="flex flex-col lg:flex-row gap-10 xl:gap-16">
+  <!-- Related items collections -->
+  <section class="py-16 sm:py-24 bg-secondary-custom border-t border-custom" id="related-section" style="display:none">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <div class="section-tag mx-auto justify-center">Tailored Co-Ords</div>
+        <h2 class="font-display text-4xl font-bold dark:text-white mt-1">Related Products</h2>
+      </div>
       
-      <!-- Image Gallery -->
-      <div class="lg:w-[55%] flex flex-col gap-4">
-        <div class="gallery-main zoom-container relative bg-secondary-custom" style="aspect-ratio:4/5">
-          <img id="main-product-image" src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-cover transition-opacity duration-200" loading="eager" />
-          ${discount > 0 ? `<span class="absolute top-4 left-4 discount-badge">-${discount}%</span>` : ''}
-          ${p.newArrival ? `<span class="absolute top-4 ${discount > 0 ? 'left-24' : 'left-4'} bg-black dark:bg-white text-white dark:text-black text-xs font-bold px-3 py-1 rounded-full">NEW</span>` : ''}
-        </div>
-        <div class="flex gap-3 overflow-x-auto pb-1">
-          ${p.images.map((img, i) => `
-            <div class="gallery-thumb flex-none w-20 h-20 sm:w-24 sm:h-24 ${i === 0 ? 'active' : ''}" onclick="setMainImage('${img}')">
-              <img src="${img}" alt="${p.name} view ${i+1}" class="w-full h-full object-cover" loading="lazy" />
-            </div>
-          `).join('')}
-        </div>
-      </div>
+      <div id="related-grid" class="products-grid"></div>
+    </div>
+  </section>
 
-      <!-- Product Info -->
-      <div class="lg:w-[45%] flex flex-col gap-5">
-        <div>
-          <p class="text-accent text-xs font-semibold uppercase tracking-widest mb-1">${p.category}</p>
-          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold dark:text-white leading-tight">${p.name}</h1>
-          <div class="flex items-center gap-2 mt-3">
-            <div class="flex items-center gap-1 text-sm">${renderStars(p.rating)}</div>
-            <span class="text-sm text-gray-500">${p.rating} (${p.reviews} reviews)</span>
+  <!-- Footer -->
+  <footer class="py-8 mt-0 border-t border-gray-100 dark:border-zinc-900 bg-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-gray-400">
+      <p>© 2026 FLY FASHION. All rights reserved.</p>
+      <p>Designed with ❤️ by <span class="text-accent font-semibold">VisioReach Concepts</span></p>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up text-sm"></i>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    let currentProduct = null;
+    let selectedSize = '';
+    let selectedColor = '';
+    let quantity = 1;
+
+    // Retrieve parameter ID
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get('id'));
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('main-navbar')?.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    function setMainImage(src) {
+      const mainImg = document.getElementById('main-product-image');
+      if (mainImg) {
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+          mainImg.src = src;
+          mainImg.style.opacity = '1';
+        }, 150);
+      }
+      
+      // Update active thumbnails style
+      document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+        thumb.classList.remove('active');
+        const img = thumb.querySelector('img');
+        if (img && img.src === src) {
+          thumb.classList.add('active');
+        }
+      });
+    }
+
+    function selectSize(btn, size) {
+      document.querySelectorAll('.prod-size-btn').forEach(b => b.classList.remove('active', 'selected'));
+      btn.classList.add('active', 'selected');
+      selectedSize = size;
+    }
+
+    function selectColor(btn, color) {
+      document.querySelectorAll('.prod-color-btn').forEach(b => b.classList.remove('active', 'selected'));
+      btn.classList.add('active', 'selected');
+      selectedColor = color;
+      
+      // Update main gallery image to correspond to selected color index
+      const btns = Array.from(document.querySelectorAll('.prod-color-btn'));
+      const index = btns.indexOf(btn);
+      if (index !== -1 && currentProduct && currentProduct.images[index]) {
+        setMainImage(currentProduct.images[index]);
+      }
+    }
+
+    function adjustQuantity(delta) {
+      if (!currentProduct) return;
+      quantity = Math.max(1, Math.min(quantity + delta, currentProduct.stock));
+      document.getElementById('qty-display').textContent = quantity;
+    }
+
+    function executeAddToCart() {
+      if (!currentProduct) return;
+      if (!selectedSize) {
+        showToast('Please select a size first!', 'warning');
+        return;
+      }
+      addToCart(currentProduct, selectedSize, selectedColor || currentProduct.colors[0], quantity);
+    }
+
+    function executeWhatsAppCheckout() {
+      if (!currentProduct) return;
+      if (!selectedSize) {
+        showToast('Please select a size first!', 'warning');
+        return;
+      }
+      
+      openWhatsApp([{
+        name: currentProduct.name,
+        color: selectedColor || currentProduct.colors[0],
+        size: selectedSize,
+        quantity: quantity,
+        price: currentProduct.price
+      }]);
+    }
+
+    function renderProductDetails(p) {
+      currentProduct = p;
+      selectedSize = p.sizes[0];
+      selectedColor = p.colors[0];
+      
+      const discount = p.oldPrice ? Math.round((1 - (p.price / p.oldPrice)) * 100) : 0;
+      document.title = `${p.name} — FLY FASHION`;
+
+      document.getElementById('product-content').innerHTML = `
+      <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">
+        <a href="index.html" class="hover:text-accent">Home</a> / 
+        <a href="shop.html" class="hover:text-accent">Shop</a> / 
+        <a href="shop.html?category=${encodeURIComponent(p.category)}" class="hover:text-accent">${p.category}</a> / 
+        <span class="text-primary">${p.name}</span>
+      </p>
+
+      <div class="flex flex-col lg:flex-row gap-10 xl:gap-16">
+        
+        <!-- Multi Image Gallery Panel -->
+        <div class="lg:w-[52%] flex flex-col gap-4">
+          <div class="gallery-main zoom-container relative bg-zinc-50 dark:bg-zinc-900 aspect-[4/5]">
+            <img id="main-product-image" src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-cover transition-opacity duration-200" />
+            ${discount > 0 ? `<span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">-${discount}% OFF</span>` : ''}
+            ${p.newArrival ? `<span class="absolute top-4 ${discount > 0 ? 'left-24' : 'left-4'} bg-accent text-black text-[10px] font-bold px-2.5 py-1 rounded-full">NEW</span>` : ''}
           </div>
-        </div>
-
-        <!-- Price -->
-        <div class="flex items-center gap-4 py-4 border-t border-b border-custom">
-          <span class="font-display text-3xl font-bold dark:text-white">${formatPrice(p.price)}</span>
-          ${p.oldPrice ? `<span class="text-gray-400 line-through text-lg">${formatPrice(p.oldPrice)}</span>` : ''}
-          ${discount > 0 ? `<span class="discount-badge ml-auto">${discount}% OFF</span>` : ''}
-        </div>
-
-        <!-- Description -->
-        <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">${p.description}</p>
-
-        <!-- Stock -->
-        <div class="flex items-center gap-2 text-sm">
-          <span class="w-2 h-2 rounded-full ${p.stock > 10 ? 'bg-green-500' : p.stock > 0 ? 'bg-yellow-500' : 'bg-red-500'}"></span>
-          <span class="dark:text-gray-300">${p.stock > 10 ? 'In Stock' : p.stock > 0 ? `Only ${p.stock} left!` : 'Out of Stock'}</span>
-        </div>
-
-        <!-- Sizes -->
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <p class="text-sm font-semibold uppercase tracking-wider dark:text-gray-300">Size</p>
-            <button class="text-xs text-accent hover:underline">Size Guide</button>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            ${p.sizes.map((s, i) => `
-              <button onclick="selectSize(this,'${s}')" class="prod-size-btn size-btn px-4 py-2 text-sm ${i === 0 ? 'bg-black text-white border-black dark:bg-white dark:text-black dark:border-white' : ''}">
-                ${s}
+          
+          <div class="flex gap-3 overflow-x-auto pb-1.5 scrollbar-thin">
+            ${p.images.map((img, i) => `
+              <button class="gallery-thumb flex-shrink-0 w-20 h-20 bg-zinc-50 dark:bg-zinc-900 ${i === 0 ? 'active' : ''}" onclick="setMainImage('${img}')">
+                <img src="${img}" alt="${p.name} thumbnail ${i+1}" class="w-full h-full object-cover" />
               </button>
             `).join('')}
           </div>
         </div>
 
-        <!-- Colors -->
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-wider mb-3 dark:text-gray-300">Color</p>
-          <div class="flex flex-wrap gap-3">
-            ${p.colors.map((c, i) => `
-              <button onclick="selectColor(this,'${c}')" class="prod-color-btn color-swatch ${i === 0 ? 'ring-2 ring-offset-2 ring-black dark:ring-white' : ''}" style="background:${c}" title="${c}"></button>
-            `).join('')}
+        <!-- Specifications Info Panel -->
+        <div class="lg:w-[48%] flex flex-col gap-5 sm:gap-6">
+          <div>
+            <span class="text-[10px] text-accent font-bold uppercase tracking-widest">${p.category}</span>
+            <h1 class="font-display text-3xl sm:text-4xl font-bold dark:text-white leading-tight mt-1">${p.name}</h1>
+            
+            <div class="flex items-center gap-2 mt-3 text-xs">
+              <div class="flex text-amber-400 gap-0.5">${renderStars(p.rating)}</div>
+              <span class="text-gray-400">(${p.reviews} verified customer reviews)</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Quantity + Add to Cart -->
-        <div class="flex flex-col sm:flex-row gap-3">
-          <div class="flex items-center gap-0 border border-custom rounded-xl overflow-hidden">
-            <button class="qty-btn rounded-none border-0 border-r border-custom" onclick="changeQty(-1)">−</button>
-            <span id="qty-display" class="w-14 text-center font-semibold dark:text-white">1</span>
-            <button class="qty-btn rounded-none border-0 border-l border-custom" onclick="changeQty(1)">+</button>
+          <!-- Currency/Price Block -->
+          <div class="flex items-center gap-4 py-4 border-t border-b border-custom">
+            <span class="font-display text-3xl font-bold dark:text-white">${formatPrice(p.price)}</span>
+            ${p.oldPrice ? `<span class="text-gray-400 line-through text-base font-semibold">${formatPrice(p.oldPrice)}</span>` : ''}
+            ${p.stock > 0 ? `<span class="ml-auto text-[10px] font-bold uppercase tracking-wider text-green-500 bg-green-500/10 px-2.5 py-1 rounded-full">In Stock</span>` : `<span class="ml-auto text-[10px] font-bold uppercase tracking-wider text-red-500 bg-red-500/10 px-2.5 py-1 rounded-full">Out of Stock</span>`}
           </div>
-          <button onclick="doAddToCart()" class="btn-primary flex-1" ${p.stock === 0 ? 'disabled style="opacity:0.5;pointer-events:none"' : ''}>
-            <i class="fas fa-bag-shopping"></i> Add to Cart
+
+          <!-- Description paragraph -->
+          <p class="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 leading-relaxed">${p.description}</p>
+
+          <!-- Size buttons selector -->
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-2.5">Available Sizes</span>
+            <div class="flex flex-wrap gap-2">
+              ${p.sizes.map((sz, idx) => `
+                <button onclick="selectSize(this, '${sz}')" class="prod-size-btn size-btn px-4 py-2.5 text-xs font-semibold ${idx === 0 ? 'active selected' : ''}">
+                  ${sz}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Color swatches circles selector -->
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-2.5">Tailoring Color Swatch</span>
+            <div class="flex gap-3">
+              ${p.colors.map((col, idx) => `
+                <button onclick="selectColor(this, '${col}')" class="prod-color-btn color-swatch ${idx === 0 ? 'active selected' : ''}" style="background:${col}" title="${col}"></button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Counter and actions block -->
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            
+            <!-- Quantity adjustment stepper -->
+            <div class="flex items-center border border-custom rounded-xl overflow-hidden self-start sm:self-auto">
+              <button class="qty-btn rounded-none border-0 border-r border-custom text-sm" onclick="adjustQuantity(-1)">−</button>
+              <span id="qty-display" class="w-12 text-center text-xs font-bold dark:text-white">1</span>
+              <button class="qty-btn rounded-none border-0 border-l border-custom text-sm" onclick="adjustQuantity(1)">+</button>
+            </div>
+
+            <!-- Standard Add to Cart CTA -->
+            <button onclick="executeAddToCart()" class="btn-primary flex-grow text-xs py-3.5" ${p.stock === 0 ? 'disabled style="opacity:0.4;pointer-events:none"' : ''}>
+              <i class="fas fa-bag-shopping"></i> Add to Shopping Bag
+            </button>
+
+            <!-- Add to Wishlist toggle -->
+            <button 
+              data-wishlist-id="${p.id}"
+              onclick="toggleWishlist(${p.id})"
+              class="w-12 h-12 border border-custom rounded-xl flex items-center justify-center hover:border-red-400 transition-colors"
+              aria-label="Wishlist"
+            >
+              <i class="far fa-heart text-red-500"></i>
+            </button>
+          </div>
+
+          <!-- WhatsApp Primary Checkout CTA -->
+          <button onclick="executeWhatsAppCheckout()" class="btn-whatsapp w-full justify-center text-xs py-3.5" ${p.stock === 0 ? 'disabled style="opacity:0.4;pointer-events:none"' : ''}>
+            <i class="fab fa-whatsapp text-lg"></i>
+            Order Immediately via WhatsApp
           </button>
-          <button onclick="toggleWishlist(${p.id}); updateWishlistIcons();" data-wishlist-id="${p.id}" class="wishlist-btn w-12 h-12 flex-shrink-0 border border-custom rounded-xl flex items-center justify-center hover:border-red-400 transition-colors">
-            <i class="${isInWishlist(p.id) ? 'fas' : 'far'} fa-heart text-red-500"></i>
-          </button>
-        </div>
 
-        <!-- WhatsApp -->
-        <button onclick="doWhatsApp()" class="btn-whatsapp w-full justify-center">
-          <i class="fab fa-whatsapp text-lg"></i>
-          Order via WhatsApp
-        </button>
-
-        <!-- Features -->
-        <div class="grid grid-cols-3 gap-3 pt-4 border-t border-custom">
-          <div class="text-center">
-            <i class="fas fa-truck text-accent text-xl mb-1"></i>
-            <p class="text-xs dark:text-gray-400">Fast Delivery</p>
-          </div>
-          <div class="text-center">
-            <i class="fas fa-undo text-accent text-xl mb-1"></i>
-            <p class="text-xs dark:text-gray-400">Free Returns</p>
-          </div>
-          <div class="text-center">
-            <i class="fas fa-shield-alt text-accent text-xl mb-1"></i>
-            <p class="text-xs dark:text-gray-400">Authentic</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Reviews Section -->
-    <div class="mt-16 border-t border-custom pt-10">
-      <h2 class="font-display text-3xl font-bold dark:text-white mb-8">Customer Reviews</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="testimonial-card">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex gap-1 text-amber-400 text-sm">★★★★★</div>
-            <span class="text-xs text-gray-400">2 days ago</span>
-          </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 italic mb-3">"Absolutely love the quality! Fits perfectly and the material feels premium. Will be ordering again."</p>
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-black font-bold text-sm">A</div>
+          <!-- Core trust features metadata list -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-custom text-center">
             <div>
-              <p class="text-xs font-semibold dark:text-white">Adaeze O.</p>
-              <p class="text-xs text-green-500"><i class="fas fa-check-circle mr-1"></i>Verified Purchase</p>
+              <i class="fas fa-truck text-accent text-lg mb-1 block"></i>
+              <span class="text-[9px] font-bold uppercase text-gray-400">Fast Delivery</span>
+            </div>
+            <div>
+              <i class="fas fa-shield-alt text-accent text-lg mb-1 block"></i>
+              <span class="text-[9px] font-bold uppercase text-gray-400">Authentic fit</span>
+            </div>
+            <div>
+              <i class="fas fa-undo text-accent text-lg mb-1 block"></i>
+              <span class="text-[9px] font-bold uppercase text-gray-400">Easy exchange</span>
             </div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex gap-1 text-amber-400 text-sm">★★★★<span class="text-gray-300">★</span></div>
-            <span class="text-xs text-gray-400">1 week ago</span>
-          </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 italic mb-3">"Great product, delivery was fast. The sizing is accurate — I usually wear M and M fits perfectly."</p>
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">K</div>
-            <div>
-              <p class="text-xs font-semibold dark:text-white">Kingsley M.</p>
-              <p class="text-xs text-green-500"><i class="fas fa-check-circle mr-1"></i>Verified Purchase</p>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-  `;
-}
+      `;
+    }
 
-loadProducts().then(products => {
-  const product = products.find(p => p.id === productId);
-  if (!product) {
-    document.getElementById('product-content').innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-box-open"></i>
-        <h2 class="font-display text-3xl font-bold dark:text-white">Product Not Found</h2>
-        <a href="shop.html" class="btn-primary mt-4">Browse All Products</a>
-      </div>`;
-    return;
-  }
+    // Launch details retriever
+    loadProducts().then(products => {
+      const product = products.find(p => p.id === productId);
+      if (!product) {
+        document.getElementById('product-content').innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-box-open mb-4"></i>
+          <h2 class="font-display text-2xl font-bold dark:text-white">Product Not Found</h2>
+          <p class="text-gray-500 text-xs mt-1">This product id doesn't match any collection catalogs.</p>
+          <a href="shop.html" class="btn-primary mt-6 text-xs">Return to Catalog</a>
+        </div>`;
+        return;
+      }
 
-  renderProduct(product);
-  updateWishlistIcons();
+      renderProductDetails(product);
+      updateWishlistIcons();
 
-  // Related products
-  const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
-  if (related.length > 0) {
-    const relSection = document.getElementById('related-section');
-    relSection.style.display = 'block';
-    document.getElementById('related-grid').innerHTML = related.map(p => buildProductCard(p)).join('');
-    setTimeout(initScrollAnimations, 100);
-  }
-});
-</script>
+      // Load related items grids
+      const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+      if (related.length > 0) {
+        document.getElementById('related-section').style.display = 'block';
+        document.getElementById('related-grid').innerHTML = related.map(p => buildProductCard(p)).join('');
+        setTimeout(initScrollAnimations, 100);
+      }
+    });
+  </script>
 </body>
 </html>
