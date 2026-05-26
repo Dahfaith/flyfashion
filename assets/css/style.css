@@ -631,3 +631,79 @@ h1, h2, h3, h4, .font-display {
 #toast-container > div {
   pointer-events: auto;
 }
+
+/* ── Mobile Sidebar Drawer ─────────────────────────────────── */
+#mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 320px;
+  height: 100vh;
+  background-color: var(--bg);
+  z-index: 2000;
+  padding: 2.25rem 1.75rem;
+  box-shadow: -10px 0 45px rgba(0,0,0,0.15);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-left: 1px solid var(--border);
+}
+
+#menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+@media (min-width: 1024px) {
+  #mobile-menu, #menu-overlay {
+    display: none !important;
+  }
+}
+
+/* ── Currency Switcher Buttons ────────────────────────────── */
+.currency-btn {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.currency-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.currency-btn.active {
+  background-color: var(--accent) !important;
+  color: #050505 !important;
+  border-color: var(--accent) !important;
+}
+
+/* ── Theme Switcher Adjustments ───────────────────────────── */
+.dark-mode-toggle {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.dark-mode-toggle:hover {
+  color: var(--accent);
+  transform: rotate(15deg) scale(1.1);
+}
+
