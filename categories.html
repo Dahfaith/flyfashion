@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Categories — FLY FASHION</title>
+  <meta name="description" content="Browse all fashion categories at FLY FASHION — Men, Women, Sneakers, Hoodies, Jerseys, Native Wears, Accessories and more." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="bg-primary text-primary">
 
+<div id="page-loader">
+  <div class="text-3xl font-display font-bold text-accent tracking-widest">FLY FASHION</div>
+  <div class="loader-ring"></div>
+</div>
+
+<div id="menu-overlay"></div>
+<nav id="mobile-menu">
+  <div class="flex items-center justify-between mb-8">
+    <span class="font-display font-bold text-2xl text-accent">FLY</span>
+    <button onclick="document.getElementById('menu-toggle').click()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800"><i class="fas fa-times text-sm"></i></button>
+  </div>
+  <div class="flex flex-col gap-1 mb-8">
+    <a href="index.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+    <a href="shop.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Shop</a>
+    <a href="categories.html" class="nav-link active px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Categories</a>
+    <a href="shop.html?filter=newArrival" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">New Arrivals</a>
+    <a href="contact.html" class="nav-link px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+  </div>
+  <div class="border-t border-custom pt-6 mb-6">
+    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Currency</p>
+    <div class="flex gap-2">
+      <button data-currency="NGN" class="currency-btn">₦ NGN</button>
+      <button data-currency="USD" class="currency-btn">$ USD</button>
+      <button data-currency="GBP" class="currency-btn">£ GBP</button>
+    </div>
+  </div>
+  <div class="border-t border-custom pt-6">
+    <button class="dark-mode-toggle flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 w-full font-medium text-sm"><i class="fas fa-moon"></i> Dark / Light</button>
+  </div>
+</nav>
+
+<header class="navbar" id="main-navbar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-2xl sm:text-3xl font-display font-bold text-accent">FLY</span>
+        <div class="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
+        <span class="hidden sm:block text-xs font-medium tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">Fashion</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="categories.html" class="nav-link active">Categories</a>
+        <a href="shop.html?filter=newArrival" class="nav-link">New Arrivals</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden md:flex gap-1">
+          <button data-currency="NGN" class="currency-btn text-xs px-2 py-1">₦</button>
+          <button data-currency="USD" class="currency-btn text-xs px-2 py-1">$</button>
+          <button data-currency="GBP" class="currency-btn text-xs px-2 py-1">£</button>
+        </div>
+        <button class="dark-mode-toggle w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"><i class="fas fa-moon text-sm"></i></button>
+        <a href="cart.html" class="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+          <i class="fas fa-bag-shopping text-sm"></i>
+          <span class="cart-count" style="display:none">0</span>
+        </a>
+        <button id="menu-toggle" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Banner -->
+<section class="relative bg-black py-20 sm:py-28 overflow-hidden">
+  <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1600&q=80" alt="Categories hero" class="absolute inset-0 w-full h-full object-cover opacity-20" loading="eager" />
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 text-center">
+    <div class="hero-badge mx-auto mb-5 inline-flex">Explore Everything</div>
+    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4">All Categories</h1>
+    <p class="text-gray-400 text-sm sm:text-base max-w-lg mx-auto">From street to ceremony — discover every style curated for you.</p>
+  </div>
+</section>
+
+<!-- Main Categories Grid -->
+<section class="py-16 sm:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12 scroll-reveal">
+      <div class="section-tag mx-auto justify-center">Browse By Style</div>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">Shop Your Category</h2>
+    </div>
+
+    <!-- Big featured categories -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+
+      <a href="shop.html?category=Men" class="category-card group aspect-[4/3] scroll-reveal overflow-hidden rounded-3xl">
+        <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=700&q=80" alt="Men" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="category-content">
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-accent text-xs font-semibold uppercase tracking-widest mb-1">Men's Wear</p>
+              <h3 class="font-display text-3xl font-bold text-white">Men</h3>
+              <p class="text-gray-300 text-sm mt-1">Slim fits, chinos, polos & more</p>
+            </div>
+            <span class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+              <i class="fas fa-arrow-right text-sm"></i>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="shop.html?category=Women" class="category-card group aspect-[4/3] scroll-reveal overflow-hidden rounded-3xl">
+        <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=700&q=80" alt="Women" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="category-content">
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-accent text-xs font-semibold uppercase tracking-widest mb-1">Women's Wear</p>
+              <h3 class="font-display text-3xl font-bold text-white">Women</h3>
+              <p class="text-gray-300 text-sm mt-1">Dresses, blazers, co-ords & more</p>
+            </div>
+            <span class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+              <i class="fas fa-arrow-right text-sm"></i>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="shop.html?category=Native+Wears" class="category-card group aspect-[4/3] scroll-reveal overflow-hidden rounded-3xl">
+        <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=700&q=80" alt="Native Wears" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="category-content">
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-accent text-xs font-semibold uppercase tracking-widest mb-1">Traditional</p>
+              <h3 class="font-display text-3xl font-bold text-white">Native Wears</h3>
+              <p class="text-gray-300 text-sm mt-1">Agbada, Buba, Isi-Agu & more</p>
+            </div>
+            <span class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+              <i class="fas fa-arrow-right text-sm"></i>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Smaller categories -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-5">
+
+      <a href="shop.html?category=Sneakers" class="category-card group aspect-square scroll-reveal overflow-hidden rounded-3xl">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80" alt="Sneakers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="category-content">
+          <h3 class="font-display text-2xl font-bold text-white">Sneakers</h3>
+          <p class="text-gray-300 text-xs mt-0.5">24 styles</p>
+        </div>
+      </a>
+
+      <a href="shop.html?category=Hoodies" class="category-card group aspect-square scroll-reveal overflow-hidden rounded-3xl">
+        <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=500&q=80" alt="Hoodies" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="category-content">
+          <h3 class="font-display text-2xl font-bold text-white">Hoodies</h3>
+          <p class="text-gray-300 text-xs mt-0.5">18 styles</p>
+        </div>
+      </a>
+
+      <a href="shop.html?category=Jerseys" class="category-card group aspect-square scroll-reveal overflow-hidden rounded-3xl">
+        <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=500&q=80" alt="Jerseys" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="category-content">
+          <h3 class="font-display text-2xl font-bold text-white">Jerseys</h3>
+          <p class="text-gray-300 text-xs mt-0.5">15 clubs</p>
+        </div>
+      </a>
+
+      <a href="shop.html?category=Accessories" class="category-card group aspect-square scroll-reveal overflow-hidden rounded-3xl">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Accessories" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        <div class="category-content">
+          <h3 class="font-display text-2xl font-bold text-white">Accessories</h3>
+          <p class="text-gray-300 text-xs mt-0.5">30 items</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Category Spotlight — Native Wear Feature -->
+<section class="py-16 sm:py-20 bg-black overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="scroll-reveal">
+        <div class="section-tag text-accent mb-4">Spotlight</div>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-5">
+          Celebrate Your <span class="text-accent">Heritage</span>
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8 text-sm sm:text-base">
+          Our Native Wears collection is a love letter to Nigerian culture. From hand-embroidered Agbadas to vibrant Ankara prints and regal Isi-Agu sets — every piece is crafted to make you shine at any occasion.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-8">
+          <span class="glass-card px-4 py-2 text-xs text-gray-300 font-medium">✦ Agbada Sets</span>
+          <span class="glass-card px-4 py-2 text-xs text-gray-300 font-medium">✦ Buba & Sokoto</span>
+          <span class="glass-card px-4 py-2 text-xs text-gray-300 font-medium">✦ Ankara Dresses</span>
+          <span class="glass-card px-4 py-2 text-xs text-gray-300 font-medium">✦ Isi-Agu</span>
+          <span class="glass-card px-4 py-2 text-xs text-gray-300 font-medium">✦ Kaftan</span>
+        </div>
+        <a href="shop.html?category=Native+Wears" class="btn-primary">
+          Shop Native Wears <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+      <div class="grid grid-cols-2 gap-4 scroll-reveal">
+        <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=400&q=80" class="rounded-3xl w-full aspect-[3/4] object-cover mt-8" loading="lazy" alt="Native wear 1" />
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" class="rounded-3xl w-full aspect-[3/4] object-cover" loading="lazy" alt="Native wear 2" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured By Category Products -->
+<section class="py-16 sm:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12 scroll-reveal">
+      <div class="section-tag mx-auto justify-center">Category Picks</div>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold dark:text-white mt-2">Top Picks Per Category</h2>
+    </div>
+
+    <!-- Tab buttons -->
+    <div class="flex flex-wrap justify-center gap-2 mb-10 scroll-reveal">
+      <button onclick="showCategoryTab(this,'Men')" class="cat-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold border border-custom hover:border-accent hover:text-accent transition-colors active-tab">Men</button>
+      <button onclick="showCategoryTab(this,'Women')" class="cat-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold border border-custom hover:border-accent hover:text-accent transition-colors">Women</button>
+      <button onclick="showCategoryTab(this,'Sneakers')" class="cat-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold border border-custom hover:border-accent hover:text-accent transition-colors">Sneakers</button>
+      <button onclick="showCategoryTab(this,'Native Wears')" class="cat-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold border border-custom hover:border-accent hover:text-accent transition-colors">Native Wears</button>
+      <button onclick="showCategoryTab(this,'Accessories')" class="cat-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold border border-custom hover:border-accent hover:text-accent transition-colors">Accessories</button>
+    </div>
+
+    <div id="cat-products-grid" class="products-grid"></div>
+
+    <div class="text-center mt-10">
+      <a id="cat-view-all" href="shop.html?category=Men" class="btn-primary inline-flex">
+        View All in Category <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick View Modal -->
+<div id="quick-view-modal" class="hidden">
+  <div class="qv-inner shadow-2xl">
+    <div class="relative overflow-hidden rounded-l-3xl sm:rounded-t-3xl sm:rounded-bl-none bg-gray-100 dark:bg-gray-800 min-h-[300px]">
+      <img id="qv-image" src="" alt="" class="w-full h-full object-cover" loading="lazy" />
+    </div>
+    <div class="p-6 sm:p-8 flex flex-col gap-4">
+      <button id="qv-close" class="absolute top-4 right-4 w-9 h-9 bg-black/10 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-black/20 transition-colors">
+        <i class="fas fa-times text-sm"></i>
+      </button>
+      <div>
+        <p class="text-accent text-xs font-semibold uppercase tracking-widest">Quick View</p>
+        <h2 id="qv-name" class="font-display text-2xl font-bold dark:text-white mt-1"></h2>
+        <div id="qv-rating" class="flex items-center gap-1 mt-1 text-sm"></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="qv-price" class="font-bold text-2xl dark:text-white"></span>
+        <span id="qv-old-price" class="text-gray-400 line-through text-sm"></span>
+      </div>
+      <p id="qv-description" class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3"></p>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider mb-2 dark:text-gray-300">Size</p>
+        <div id="qv-sizes" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider mb-2 dark:text-gray-300">Color</p>
+        <div id="qv-colors" class="flex gap-2"></div>
+      </div>
+      <div class="flex gap-3 mt-auto">
+        <button onclick="addToCartFromModal()" class="flex-1 btn-primary text-sm py-3"><i class="fas fa-bag-shopping"></i> Add to Cart</button>
+        <a id="qv-link" href="#" class="flex-1 text-center border-2 border-black dark:border-white text-black dark:text-white font-bold text-sm py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">View Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="py-12 bg-black">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
+      <div class="col-span-2 sm:col-span-1">
+        <div class="text-2xl font-display font-bold text-accent mb-3">FLY FASHION</div>
+        <p class="text-gray-500 text-xs leading-relaxed">Nigeria's premium online fashion destination.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-4">Categories</h4>
+        <div class="flex flex-col gap-1">
+          <a href="shop.html?category=Men" class="footer-link">Men</a>
+          <a href="shop.html?category=Women" class="footer-link">Women</a>
+          <a href="shop.html?category=Sneakers" class="footer-link">Sneakers</a>
+          <a href="shop.html?category=Native+Wears" class="footer-link">Native Wears</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-4">More</h4>
+        <div class="flex flex-col gap-1">
+          <a href="shop.html?category=Hoodies" class="footer-link">Hoodies</a>
+          <a href="shop.html?category=Jerseys" class="footer-link">Jerseys</a>
+          <a href="shop.html?category=Accessories" class="footer-link">Accessories</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-xs uppercase tracking-widest mb-4">Links</h4>
+        <div class="flex flex-col gap-1">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="shop.html" class="footer-link">Shop</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+          <a href="cart.html" class="footer-link">Cart</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600">
+      <p>© 2025 FLY FASHION. All rights reserved.</p>
+      <p>Designed with ❤️ by <span class="text-accent font-semibold">VisioReach Concepts</span></p>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up text-sm"></i></button>
+
+<script src="assets/js/main.js"></script>
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('main-navbar')?.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+let allCatProducts = [];
+let currentCatTab = 'Men';
+
+function showCategoryTab(btn, cat) {
+  document.querySelectorAll('.cat-tab-btn').forEach(b => {
+    b.classList.remove('active-tab', 'bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'border-black');
+  });
+  btn.classList.add('active-tab', 'bg-black', 'text-white', 'border-black');
+  currentCatTab = cat;
+
+  const grid = document.getElementById('cat-products-grid');
+  const filtered = allCatProducts.filter(p => p.category === cat).slice(0, 4);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="col-span-full empty-state"><i class="fas fa-box-open"></i><p class="text-gray-500">No products in this category yet.</p></div>`;
+  } else {
+    grid.innerHTML = filtered.map(p => buildProductCard(p)).join('');
+    setTimeout(initScrollAnimations, 100);
+    updateWishlistIcons();
+  }
+
+  const viewAllLink = document.getElementById('cat-view-all');
+  if (viewAllLink) viewAllLink.href = `shop.html?category=${encodeURIComponent(cat)}`;
+}
+
+// Set first tab active on load
+document.addEventListener('DOMContentLoaded', () => {
+  const firstTab = document.querySelector('.cat-tab-btn');
+  if (firstTab) {
+    firstTab.classList.add('bg-black', 'text-white', 'border-black');
+  }
+});
+
+loadProducts().then(products => {
+  allCatProducts = products;
+  showCategoryTab(document.querySelector('.cat-tab-btn'), 'Men');
+});
+</script>
+</body>
+</html>
